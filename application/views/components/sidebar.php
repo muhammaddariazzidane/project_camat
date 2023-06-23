@@ -1,19 +1,20 @@
 <aside class="sidebar-wrapper" data-simplebar="true">
   <div class="sidebar-header">
     <div>
-      <img src="<?= base_url() ?>/assets/images/logo-icon.png" class="logo-icon" alt="logo icon">
+      <i class='bx bxs-business fs-2 text-white'></i>
+      <!-- <img src="<?= base_url() ?>/assets/images/logo-icon.png" class="logo-icon" alt="logo icon"> -->
     </div>
     <div>
       <h4 class="logo-text">Dashboard</h4>
     </div>
-    <div class="toggle-icon ms-auto"><i class='bx bx-arrow-to-left'></i>
+    <div class="toggle-icon ms-auto"><i class='bx bx-menu'></i>
     </div>
   </div>
   <!--navigation-->
   <ul class="metismenu" id="menu">
     <li>
       <a href="<?= base_url('dashboard') ?>">
-        <div class="parent-icon"><i class='bx bx-home-circle'></i>
+        <div class="parent-icon"><i class='bx bxs-widget'></i>
         </div>
         <div class="menu-title">Dashboard</div>
       </a>
@@ -25,13 +26,13 @@
         </div>
         <div class="menu-title">Data pengajuan</div>
         <?php if ($this->session->role_id == 3) : ?>
-          <span class="badge text-bg-danger ms-2"><?= $jml_pengajuan ? $jml_pengajuan : '' ?></span>
+          <span class="badge text-bg-warning ms-2"><?= $jml_pengajuan ? $jml_pengajuan : '' ?></span>
         <?php endif ?>
         <?php if ($this->session->role_id == 2) : ?>
-          <span class="badge text-bg-danger ms-2"><?= $jml_pengajuan_petugas ? $jml_pengajuan_petugas : '' ?></span>
+          <span class="badge text-bg-warning ms-2"><?= $jml_pengajuan_petugas ? $jml_pengajuan_petugas : '' ?></span>
         <?php endif ?>
         <?php if ($this->session->role_id == 1) : ?>
-          <span class="badge text-bg-danger ms-2"><?= $jml_pengajuan_camat ? $jml_pengajuan_camat : '' ?></span>
+          <span class="badge text-bg-warning ms-2"><?= $jml_pengajuan_camat ? $jml_pengajuan_camat : '' ?></span>
         <?php endif ?>
       </a>
     </li>

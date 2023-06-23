@@ -51,12 +51,14 @@ class Dokumen extends CI_Controller
             'nama_dokumen' => $nama_dokumen,
             'keterangan' => $keterangan,
             'file_dokumen' =>  $file_dokumen,
-            'tgl_dibuat' => time()
+            'tgl_dibuat' => date('Y-m-d')
           ];
           // Simpan data ke database
           $this->db->insert('dokumen', $data);
           // Redirect ke halaman sukses atau halaman lainnya
-          redirect('/');
+          $this->session->set_flashdata('success
+          ', 'Berhasil menambah dokumen');
+          redirect('dashboard');
         } else {
           echo $this->upload->display_errors();
         }

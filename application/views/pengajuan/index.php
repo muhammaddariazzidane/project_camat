@@ -1,4 +1,7 @@
 <h3>Data Pengajuan</h3>
+<?php
+$role_id = $this->session->role_id;
+?>
 <?php if ($this->session->success) : ?>
   <div class="alert alert-success" role="alert">
     <?= $this->session->success ?>
@@ -15,33 +18,36 @@
             <th>Nomor dokumen</th>
             <th>Nama dokumen</th>
             <th>Tanggal pengajuan</th>
+            <?php if ($role_id == 3) : ?>
+              <th>Tanggal selesai</th>
+            <?php endif ?>
             <th>Status</th>
             <th>Keterangan</th>
-            <?php if ($this->session->role_id != 3) : ?>
+            <?php if ($role_id != 3) : ?>
               <th class="text-center">Ubah status</th>
             <?php endif ?>
-            <?php if ($this->session->role_id == 3) : ?>
+            <?php if ($role_id == 3) : ?>
               <th class="text-center">file dokumen</th>
             <?php endif ?>
           </tr>
         </thead>
         <tbody>
           <?php foreach ($pengajuan as $d) : ?>
-            <?php if ($this->session->role_id == 1 && $d->status == 1 | $d->status == 2 | $d->status == 3) : ?>
+            <?php if ($role_id == 1 && $d->status == 1) : ?>
               <tr>
                 <td><?= $d->nama ?></td>
                 <td><?= $d->nomor_dokumen ?></td>
                 <td><?= $d->nama_dokumen ?></td>
-                <td><?= date('d-M-Y', $d->tgl_pengajuan) ?></td>
+                <td><?= dateindo($d->tgl_pengajuan) ?></td>
                 <td>
                   <span class="badge p-2 <?= $d->status == 0 ? 'text-bg-secondary' : ($d->status == 1 ? 'text-bg-primary' : ($d->status == 2 ? 'text-bg-success' : 'text-bg-danger')) ?>">
-                    <?= $d->status == 0 ? 'pending' : ($d->status == 1 ? 'disetujui petugas' : ($d->status == 2 ? 'selesai' : 'ditolak')) ?>
+                    <?= $d->status == 0 ? 'pending' : ($d->status == 1 ? 'Disetujui petugas' : ($d->status == 2 ? 'Selesai' : 'Ditolak')) ?>
                   </span>
                 </td>
                 <td class="text-center"><?= $d->keterangan ? $d->keterangan : '-' ?></td>
                 <?php if ($d->status == 2) : ?>
                   <td class="d-flex justify-content-center">
-                    <button class="btn btn-dark btn-sm">Selesai</button>
+                    <button class="btn btn-dark btn-sm" disabled>Selesai</button>
                   </td>
                 <?php else : ?>
                   <td class="d-flex gap-1 mx-auto justify-content-center">
@@ -75,12 +81,12 @@
               </div>
             <?php endif ?>
             <!-- petugas -->
-            <?php if ($this->session->role_id == 2 && $d->status == 0 | $d->status == 1) : ?>
+            <?php if ($role_id == 2 && $d->status == 0 | $d->status == 1) : ?>
               <tr>
                 <td><?= $d->nama ?></td>
                 <td><?= $d->nomor_dokumen ?></td>
                 <td><?= $d->nama_dokumen ?></td>
-                <td><?= date('d-M-Y', $d->tgl_pengajuan) ?></td>
+                <td><?= dateindo($d->tgl_pengajuan) ?></td>
                 <td>
                   <span class="badge p-2 <?= $d->status == 0 ? 'text-bg-secondary' : ($d->status == 1 ? 'text-bg-primary' : ($d->status == 2 ? 'text-bg-success' : 'text-bg-danger')) ?>">
                     <?= $d->status == 0 ? 'pending' : ($d->status == 1 ? 'Menunggu persetujuan camat' : ($d->status == 2 ? 'selesai' : 'ditolak')) ?>
@@ -123,12 +129,13 @@
                 </div>
               </div>
             <?php endif ?>
-            <?php if ($this->session->role_id == 3) : ?>
+            <?php if ($role_id == 3) : ?>
               <tr>
                 <td><?= $d->nama ?></td>
                 <td><?= $d->nomor_dokumen ?></td>
                 <td><?= $d->nama_dokumen ?></td>
-                <td><?= date('d-M-Y', $d->tgl_pengajuan) ?></td>
+                <td class="text-center"><?= dateindo($d->tgl_pengajuan) ?></td>
+                <td class="text-center"><?= strlen($d->tgl_selesai > 0) ? dateindo($d->tgl_selesai) : '-'  ?></td>
                 <td>
                   <span class="badge p-2 <?= $d->status == 0 ? 'text-bg-secondary' : ($d->status == 1 ? 'text-bg-primary' : ($d->status == 2 ? 'text-bg-success' : 'text-bg-danger')) ?>">
                     <?= $d->status == 0 ? 'pending' : ($d->status == 1 ? 'disetujui petugas' : ($d->status == 2 ? 'selesai' : 'ditolak')) ?>
@@ -137,10 +144,19 @@
                 <td class="text-center"><?= $d->keterangan ? $d->keterangan : '-' ?></td>
                 <?php if ($d->status == 2 && $d->printed == 0) : ?>
                   <td>
-                    <a href="<?= base_url('pdf/cetak/') . $d->file_dokumen . '/' . $d->id  ?>" class="badge py-2 px-4 text-bg-primary">unduh dokumen</a>
+                    <a href="<?= base_url('pdf/cetak/') . $d->file_dokumen . '/' . $d->id  ?>" class="badge py-2 px-4 text-bg-primary">Lihat dokumen</a>
                   </td>
                 <?php else : ?>
-                  <td class="text-center">-</td>
+                  <?php if ($d->status == 0 | $d->status == 1 && $d->printed == 0) : ?>
+                    <td class="text-center"><small class="text-muted">Belum bisa melihat dokumen</small></td>
+                  <?php else : ?>
+                    <?php if ($d->status == 3) : ?>
+                      <td class="text-center"><small class="text-muted">Tidak dapat melihat dokumen</small></td>
+
+                    <?php else : ?>
+                      <td class="text-center"><small class="text-muted">Dokumen sudah dilihat</small></td>
+                    <?php endif ?>
+                  <?php endif ?>
 
                 <?php endif ?>
                 <!-- <td><span class="badge bg-success text-white shadow-sm">Paid</span></td> -->
@@ -152,6 +168,7 @@
       </table>
     </div>
   </div>
+  <?= $this->pagination->create_links() ?>
 </div>
 
 <script>

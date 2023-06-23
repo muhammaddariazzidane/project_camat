@@ -26,7 +26,18 @@ class Pengajuan extends CI_Controller
         $data = [
           'dokumen_id' => $data['dokumen']->id,
           'user_id' => $data['user']->id,
-          'tgl_pengajuan' => time(),
+          'tgl_pengajuan' => date('Y-m-d'),
+          'status' => 0,
+        ];
+        $this->db->insert('pengajuan', $data);
+        $this->session->set_flashdata('success', 'Berhasil mengajukan, tunggu disetujui petugas');
+        redirect('dashboard');
+      }
+      if ($cek->status == 2) {
+        $data = [
+          'dokumen_id' => $data['dokumen']->id,
+          'user_id' => $data['user']->id,
+          'tgl_pengajuan' => date('Y-m-d'),
           'status' => 0,
         ];
         $this->db->insert('pengajuan', $data);
@@ -37,7 +48,7 @@ class Pengajuan extends CI_Controller
       $data = [
         'dokumen_id' => $data['dokumen']->id,
         'user_id' => $data['user']->id,
-        'tgl_pengajuan' => time(),
+        'tgl_pengajuan' => date('Y-m-d'),
         'status' => 0,
       ];
       $this->db->insert('pengajuan', $data);
@@ -55,7 +66,7 @@ class Pengajuan extends CI_Controller
     }
     if ($this->session->role_id == 1) {
       $this->db->set('status', 2);
-      $this->db->set('tgl_selesai', time());
+      $this->db->set('tgl_selesai', date('Y-m-d'));
       $this->db->where('id', $id);
       $this->db->update('pengajuan');
       $this->db->insert('riwayat_pengajuan', ['pengajuan_id' => $id]);
@@ -69,10 +80,12 @@ class Pengajuan extends CI_Controller
     if ($keterangan) {
       $this->db->set('status', 3);
       $this->db->set('keterangan', $keterangan);
+      $this->db->set('tgl_selesai', date('Y-m-d'));
       $this->db->where('id', $id);
       $this->db->update('pengajuan');
     } else {
       $this->db->set('status', 3);
+      $this->db->set('tgl_selesai', date('Y-m-d'));
       $this->db->where('id', $id);
       $this->db->update('pengajuan');
     }

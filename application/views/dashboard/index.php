@@ -40,7 +40,64 @@ $role_id = $this->session->role_id;
     </div>
   </div>
 </div>
-
+<div class="row row-cols-2  row-cols-md-2 row-cols-xl-4">
+  <div class="col">
+    <div class="card radius-10 border-primary border-start border-0 border-4">
+      <div class="card-body">
+        <div class="d-flex align-items-center">
+          <div>
+            <p class="mb-0">Dokumen</p>
+            <h4 class="my-1 text-primary"><?= $jml_dokumen ?></h4>
+          </div>
+          <div class="text-primary ms-auto font-35"><i class="bx bxs-file-archive"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card radius-10 border-dark border-start border-0 border-4">
+      <div class="card-body">
+        <div class="d-flex align-items-center">
+          <div>
+            <p class="mb-0">Users</p>
+            <h4 class="my-1 text-dark"><?= $jml_users ?></h4>
+          </div>
+          <div class="text-dark ms-auto font-35"><i class="bx bx-group"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card radius-10 border-success border-start border-0 border-4">
+      <div class="card-body">
+        <div class="d-flex align-items-center">
+          <div>
+            <p class="mb-0">Pengajuan berhasil</p>
+            <h4 class="my-1 text-success"><?= $jml_pengajuan_sukses ?></h4>
+          </div>
+          <div class="text-success ms-auto font-35"><i class="bx bx-select-multiple"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card radius-10 border-danger border-start border-0 border-4">
+      <div class="card-body">
+        <div class="d-flex align-items-center">
+          <div class="overflow-">
+            <p class="mb-0">Pengajuan Gagal</p>
+            <h4 class="my-1 text-danger "><?= $jml_pengajuan_gagal ?></h4>
+          </div>
+          <div class="text-danger ms-auto font-35"><i class="bx bx-x-circle"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <h3 class="mb-3">Data Dokumen</h3>
 <?php if ($role_id != 3) : ?>
@@ -87,23 +144,26 @@ $role_id = $this->session->role_id;
               <td><?= $d->nomor_dokumen ?></td>
               <td><?= $d->nama_dokumen ?></td>
               <td><?= $d->keterangan ?></td>
-              <td><?= date('d-M-Y', $d->tgl_dibuat) ?></td>
+              <td><?= dateindo($d->tgl_dibuat) ?></td>
               <?php if ($role_id == 3) : ?>
                 <td><a onclick="return confirm('ingin mengajukan melihat dokumen?')" href="<?= base_url('pengajuan/store/') . $d->nomor_dokumen . '/' . $this->session->id ?>" class="badge py-2 px-4 text-bg-primary">Ajukan ingin lihat</a></td>
               <?php else : ?>
-                <td><a href="<?= base_url('assets/upload/') . $d->file_dokumen ?>" download class="badge py-2 px-4 text-bg-primary">Cetak</a></td>
+                <td><a href="<?= base_url('assets/upload/') . $d->file_dokumen ?>" class="badge py-2 px-4 text-bg-primary">Lihat</a></td>
               <?php endif ?>
               <?php if ($role_id != 3) : ?>
                 <td class="d-flex gap-1 justify-content-center">
-                  <a href="<?= base_url('edit_dokumen/') . $d->id ?> " class="btn btn-sm btn-primary">Edit</a>
-                  <a href="<?= base_url('delete_dokumen/' . $d->id) ?>" onclick="return confirm('yakin mau hapus dokumen?')" class="btn btn-sm btn-danger">Hapus</a>
+                  <a href="<?= base_url('edit_dokumen/') . $d->id ?> " class="btn btn-sm btn-primary"><i class='bx bxs-edit mx-auto'></i></a>
+                  <a href="<?= base_url('delete_dokumen/' . $d->id) ?>" onclick="return confirm('yakin mau hapus dokumen?')" class="btn btn-sm btn-danger"><i class='bx bxs-trash mx-auto'></i></a>
                 </td>
               <?php endif ?>
-            </tr>
-          <?php endforeach ?>
 
+            </tr>
+
+          <?php endforeach ?>
         </tbody>
+
       </table>
     </div>
   </div>
+  <?= $this->pagination->create_links(); ?>
 </div>
