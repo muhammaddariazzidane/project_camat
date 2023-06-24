@@ -3,7 +3,7 @@
 $root = (isset($_SERVER['HTTPS']) ? "https://" : "http://") . $_SERVER['HTTP_HOST'];
 $root .= str_replace(basename($_SERVER['SCRIPT_NAME']), '', $_SERVER['SCRIPT_NAME']);
 
-$config['base_url'] = $root . 'dashboard/index';
+$config['base_url'] = $root . 'dashboard/';
 
 $config['full_tag_open'] = '<nav><ul class="pagination justify-content-center ">';
 $config['full_tag_close'] = '</ul></nav>';

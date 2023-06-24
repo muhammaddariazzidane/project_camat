@@ -1,8 +1,7 @@
-<aside class="sidebar-wrapper" data-simplebar="true">
+<aside class="sidebar-wrapper " data-simplebar="true">
   <div class="sidebar-header">
     <div>
       <i class='bx bxs-business fs-2 text-white'></i>
-      <!-- <img src="<?= base_url() ?>/assets/images/logo-icon.png" class="logo-icon" alt="logo icon"> -->
     </div>
     <div>
       <h4 class="logo-text">Dashboard</h4>
@@ -26,13 +25,13 @@
         </div>
         <div class="menu-title">Data pengajuan</div>
         <?php if ($this->session->role_id == 3) : ?>
-          <span class="badge text-bg-warning ms-2"><?= $jml_pengajuan ? $jml_pengajuan : '' ?></span>
+          <span class="badge text-bg-danger ms-1 "><?= $jml_pengajuan ? $jml_pengajuan : '' ?></span>
         <?php endif ?>
         <?php if ($this->session->role_id == 2) : ?>
-          <span class="badge text-bg-warning ms-2"><?= $jml_pengajuan_petugas ? $jml_pengajuan_petugas : '' ?></span>
+          <span class="badge text-bg-danger ms-1 "><?= $jml_pengajuan_petugas ? $jml_pengajuan_petugas : '' ?></span>
         <?php endif ?>
         <?php if ($this->session->role_id == 1) : ?>
-          <span class="badge text-bg-warning ms-2"><?= $jml_pengajuan_camat ? $jml_pengajuan_camat : '' ?></span>
+          <span class="badge text-bg-danger ms-1 "><?= $jml_pengajuan_camat ? $jml_pengajuan_camat : '' ?></span>
         <?php endif ?>
       </a>
     </li>

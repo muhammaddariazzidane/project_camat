@@ -23,7 +23,7 @@
   <link href="<?= base_url() ?>/assets/css/icons.css" rel="stylesheet">
   <!-- Theme Style CSS -->
   <link rel="stylesheet" href="<?= base_url() ?>/assets/css/semi-dark.css" />
-  <title>Rocker - Free Bootstrap 5 Admin Dashboard Template</title>
+  <title>Login | Register</title>
 </head>
 
 <body>

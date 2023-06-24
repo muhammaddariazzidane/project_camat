@@ -14,7 +14,6 @@ class Dashboard extends CI_Controller
     $data['jml_users'] = $this->db->get('user')->num_rows();
     $data['jml_pengajuan_sukses'] = $this->db->get_where('pengajuan', ['status' => 2])->num_rows();
     $data['jml_pengajuan_gagal'] = $this->db->get_where('pengajuan', ['status' => 3])->num_rows();
-    $this->load->library('pagination');
 
 
     $config['total_rows'] = $data['jml_dokumen'];
@@ -33,10 +32,9 @@ class Dashboard extends CI_Controller
   }
   public function pengajuan()
   {
-    $this->load->library('pagination');
     // hitung
     $data['hitung'] = $this->Pengajuan_model->hitung();
-    $config['base_url'] = base_url('dashboard/pengajuan');
+    $config['base_url'] = base_url('pengajuan/');
 
     $config['total_rows'] = $data['hitung'];
     $config['per_page'] = 10;

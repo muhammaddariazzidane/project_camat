@@ -49,8 +49,8 @@ class Auth extends CI_Controller
   }
   public function register()
   {
-    if ($this->session->username) {
-      redirect('/');
+    if ($this->session->nama) {
+      redirect('dashboard');
     }
     // 
     $this->form_validation->set_rules('nama', 'Nama', 'required|max_length[20]');

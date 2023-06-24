@@ -23,7 +23,7 @@
   <link href="<?= base_url() ?>/assets/css/icons.css" rel="stylesheet">
   <!-- Theme Style CSS -->
   <link rel="stylesheet" href="<?= base_url() ?>/assets/css/semi-dark.css" />
-  <title>Rocker - Free Bootstrap 5 Admin Dashboard Template</title>
+  <title>Website Pengelolaan dokumen</title>
 </head>
 
 <body>
@@ -50,7 +50,7 @@
     <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
     <!--End Back To Top Button-->
     <footer class="page-footer">
-      <p class="mb-0">Copyright © 2021. All right reserved.</p>
+      <p class="mb-0">Copyright © 2023. All right reserved.</p>
     </footer>
   </div>
   <!--end wrapper-->
