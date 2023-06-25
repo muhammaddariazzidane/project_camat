@@ -56,11 +56,12 @@ class Dokumen extends CI_Controller
           // Simpan data ke database
           $this->db->insert('dokumen', $data);
           // Redirect ke halaman sukses atau halaman lainnya
-          $this->session->set_flashdata('success
-          ', 'Berhasil menambah dokumen');
+          $this->session->set_flashdata('success', 'Berhasil menambah dokumen');
           redirect('dashboard');
         } else {
-          echo $this->upload->display_errors();
+          // $errors = $this->upload->display_errors();
+          $this->session->set_flashdata('error', 'Tipe file yang Anda coba unggah harus berupa PDF.');
+          redirect('dashboard');
         }
       }
     }

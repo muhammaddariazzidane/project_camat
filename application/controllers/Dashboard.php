@@ -33,8 +33,8 @@ class Dashboard extends CI_Controller
   public function pengajuan()
   {
     // hitung
-    $data['hitung'] = $this->Pengajuan_model->hitung();
-    $config['base_url'] = base_url('pengajuan/');
+    $data['hitung'] = $this->db->get_where('pengajuan', ['status' => 0])->num_rows();
+    $config['base_url'] = base_url('pengajuan/index/');
 
     $config['total_rows'] = $data['hitung'];
     $config['per_page'] = 10;
@@ -48,12 +48,23 @@ class Dashboard extends CI_Controller
     $data['jml_pengajuan'] = $this->Pengajuan_model->jumlahPengajuan();
 
     $data['jml_pengajuan_petugas'] = $this->Pengajuan_model->jumlahPengajuanPetugas();
+    // var_dump($data['jml_pengajuan_petugas']);
+    // die;
     $data['content'] = $this->load->view('pengajuan/index', $data, true);
     $this->load->view('layouts/main', $data);
   }
   public function riwayat()
   {
-    $data['riwayat'] = $this->Pengajuan_model->getRiwayat();
+    $data['jml_riwayat'] = $this->db->get('riwayat_pengajuan')->num_rows();
+    $config['base_url'] = base_url('riwayat_pengajuan/index/');
+
+    $config['total_rows'] = $data['jml_riwayat'];
+    $config['per_page'] = 10;
+
+    $this->pagination->initialize($config);
+
+    $data['start'] = $this->uri->segment(3);
+    $data['riwayat'] = $this->Pengajuan_model->getRiwayat($config['per_page'], $data['start']);
     $data['jml_pengajuan'] = $this->Pengajuan_model->jumlahPengajuan();
     $data['jml_pengajuan_petugas'] = $this->Pengajuan_model->jumlahPengajuanPetugas();
     $data['jml_pengajuan_camat'] = $this->Pengajuan_model->jumlahPengajuanCamat();

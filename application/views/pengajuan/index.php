@@ -33,6 +33,7 @@ $role_id = $this->session->role_id;
         </thead>
         <tbody>
           <?php foreach ($pengajuan as $d) : ?>
+            <!-- admin -->
             <?php if ($role_id == 1 && $d->status == 1) : ?>
               <tr>
                 <td><?= $d->nama ?></td>
@@ -54,7 +55,7 @@ $role_id = $this->session->role_id;
                     <?php if ($d->status == 3) : ?>
                       -
                     <?php else : ?>
-                      <a href="<?= base_url('pengajuan/ubah_status/') . $d->id ?>" class="btn btn-sm btn-success">Setujui</a>
+                      <a href="<?= base_url('ubah_status/') . $d->id ?>" class="btn btn-sm btn-success">Setujui</a>
                       <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal2" data-id="<?= $d->id ?>">Tolak</button>
                     <?php endif ?>
                   </td>
@@ -68,7 +69,7 @@ $role_id = $this->session->role_id;
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                      <?= form_open('pengajuan/tolak/' . $d->id)  ?>
+                      <?= form_open('tolak_pengajuan/' . $d->id)  ?>
                       <label for="keterangan" class="form-label">keterangan (Opsional)</label>
                       <textarea name="keterangan" rows="3" class="form-control"></textarea>
                     </div>
@@ -101,7 +102,7 @@ $role_id = $this->session->role_id;
                 <?php else : ?>
                   <td class="d-flex gap-1 justify-content-center">
                     <?php if ($d->status == 0) : ?>
-                      <a href="<?= base_url('pengajuan/ubah_status/') . $d->id ?>" class="btn btn-sm btn-success">Setujui</a>
+                      <a href="<?= base_url('ubah_status/') . $d->id ?>" class="btn btn-sm btn-success">Setujui</a>
                       <button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" data-id="<?= $d->id ?>">Tolak</button>
                     <?php else : ?>
                       <div class="text-center">-</div>
@@ -117,7 +118,7 @@ $role_id = $this->session->role_id;
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                      <?= form_open('pengajuan/tolak/' . $d->id)  ?>
+                      <?= form_open('tolak_pengajuan/' . $d->id)  ?>
                       <label for="keterangan" class="form-label">keterangan (Opsional)</label>
                       <textarea name="keterangan" rows="3" class="form-control"></textarea>
                     </div>
@@ -129,6 +130,7 @@ $role_id = $this->session->role_id;
                 </div>
               </div>
             <?php endif ?>
+            <!--  -->
             <?php if ($role_id == 3) : ?>
               <tr>
                 <td><?= $d->nama ?></td>

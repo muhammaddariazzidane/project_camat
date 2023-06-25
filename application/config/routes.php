@@ -56,8 +56,14 @@ $route['login'] = 'auth';
 $route['register'] = 'auth/register';
 $route['logout'] = 'auth/logout';
 $route['pengajuan'] = 'dashboard/pengajuan';
-$route['pengajuan/(:num)'] = 'dashboard/pengajuan/$1';
-$route['dashboard/(:num)'] = 'dashboard/index/$1';
+$route['pengajuan/index/(:num)'] = 'dashboard/pengajuan/$1';
+$route['tolak_pengajuan/(:num)'] = 'pengajuan/tolak/$1';
+$route['dashboard/index(:num)'] = 'dashboard/index/$1';
 $route['riwayat_pengajuan'] = 'dashboard/riwayat';
+$route['riwayat_pengajuan/index/(:num)'] = 'dashboard/riwayat/$1';
+
 $route['delete_dokumen/(:num)'] = 'dokumen/delete/$1';
 $route['edit_dokumen/(:num)'] = 'dokumen/edit/$1';
+$route['tambah_dokumen'] = 'dokumen/store';
+$route['ubah_status/(:num)'] = 'pengajuan/ubah_status/$1';
+$route['tambah_pengajuan/(:num)/(:any)'] = 'pengajuan/store/$1/$2';
