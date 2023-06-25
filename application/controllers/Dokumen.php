@@ -13,16 +13,27 @@ class Dokumen extends CI_Controller
     // Validasi input form
     $this->form_validation->set_rules('nomor_dokumen', 'Nomor Dokumen', 'required|is_unique[dokumen.nomor_dokumen]', ['is_unique' => 'Nomor dokumen harus unik', 'required' => 'Nomor dokumen harus diisi']);
     $this->form_validation->set_rules('nama_dokumen', 'Nama Dokumen', 'required', ['required' => 'Nama dokumen harus diisi']);
+    $this->form_validation->set_rules('keterangan', 'Keterangan', 'required', ['required' => 'Keterangan harus diisi']);
     // Lanjutkan dengan validasi untuk field lainnya jika diperlukan
 
     if ($this->form_validation->run() == FALSE) {
-      // Jika validasi gagal, tampilkan pesan error atau kembali ke halaman form
-      $data['dokumen'] = $this->db->get('dokumen')->result();
+      $data['jml_dokumen'] = $this->db->get('dokumen')->num_rows();
+      $data['jml_users'] = $this->db->get('user')->num_rows();
+      $data['jml_pengajuan_sukses'] = $this->db->get_where('pengajuan', ['status' => 2])->num_rows();
+      $data['jml_pengajuan_gagal'] = $this->db->get_where('pengajuan', ['status' => 3])->num_rows();
+
+
+      $config['total_rows'] = $data['jml_dokumen'];
+      $config['per_page'] = 10;
+
+
+      $this->pagination->initialize($config);
+      // mulai pagination
+      $data['start'] = $this->uri->segment(3);
+      $data['dokumen'] = $this->Dokumen_model->getDokumen($config['per_page'], $data['start']);
       $data['jml_pengajuan'] = $this->Pengajuan_model->jumlahPengajuan();
       $data['jml_pengajuan_petugas'] = $this->Pengajuan_model->jumlahPengajuanPetugas();
       $data['jml_pengajuan_camat'] = $this->Pengajuan_model->jumlahPengajuanCamat();
-
-      $this->session->set_flashdata('error', 'Periksa kembali inputan');
       $data['content'] = $this->load->view('dashboard/index', $data, true);
       $this->load->view('layouts/main', $data);
     } else {

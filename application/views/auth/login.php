@@ -6,17 +6,9 @@
           <div class="mb-4 text-center">
             <h2> Login</h2>
           </div>
-          <?php if ($this->session->success) : ?>
-            <div class="alert alert-success mx-4 alert-dismissible fade show" role="alert">
-              <?= $this->session->success ?>
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-          <?php endif ?>
+          <div class="flash-data-success" data-flashdata="<?= $this->session->success ?>"></div>
           <?php if ($this->session->error) : ?>
-            <div class="alert alert-danger mx-4 alert-dismissible fade show" role="alert">
-              <?= $this->session->error ?>
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
+            <div class="flash-data-error" data-flashdata="<?= $this->session->error ?>"></div>
           <?php endif ?>
           <div class="card">
             <div class="card-body">

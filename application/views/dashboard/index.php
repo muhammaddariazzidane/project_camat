@@ -21,10 +21,16 @@ $role_id = $this->session->role_id;
         <div class="mb-3">
           <label for="nama_dokumen" class="form-label">Nama dokumen</label>
           <input type="text" class="form-control" id="nama_dokumen" name="nama_dokumen" placeholder="nama dokumen">
+          <div id="validationServerUsernameFeedback" class="invalid-feedback d-block">
+            <?= form_error('nama_dokumen') ?>
+          </div>
         </div>
         <div class="mb-3">
           <label for="keterangan" class="form-label">Keterangan</label>
           <textarea name="keterangan" class="form-control" id="keterangan" rows="3"></textarea>
+          <div id="validationServerUsernameFeedback" class="invalid-feedback d-block">
+            <?= form_error('keterangan') ?>
+          </div>
         </div>
         <div class="mb-3">
           <label for="file_dokumen" class="form-label">File</label>
@@ -109,26 +115,11 @@ $role_id = $this->session->role_id;
   </button>
 <?php endif ?>
 
-<?php if ($this->session->success) : ?>
-  <div class="alert alert-success" role="alert">
-    <?= $this->session->success ?>
-  </div>
-<?php endif ?>
+<div class="flash-data-success" data-flashdata="<?= $this->session->success ?>"></div>
+<div class="flash-data-info" data-flashdata="<?= $this->session->info ?>"></div>
 
-<?php if ($this->session->info) : ?>
-  <div class="alert alert-info" role="alert">
-    <?= $this->session->info ?>
-  </div>
-<?php endif ?>
-<?php if ($this->session->error) : ?>
-  <div class="alert alert-danger" role="alert">
-    <?= $this->session->error ?>
-  </div>
-<?php endif ?>
 <?php if (validation_errors()) : ?>
-  <div class="alert alert-danger" role="alert">
-    <?= $this->session->flashdata('error') ?>
-  </div>
+  <div class="flash-data-error" data-flashdata="<?= validation_errors() ?>"></div>
 <?php endif ?>
 <div class="card radius-10">
   <div class="card-body">
@@ -155,14 +146,14 @@ $role_id = $this->session->role_id;
               <td><?= $d->keterangan ?></td>
               <td><?= dateindo($d->tgl_dibuat) ?></td>
               <?php if ($role_id == 3) : ?>
-                <td><a onclick="return confirm('ingin mengajukan melihat dokumen?')" href="<?= base_url('tambah_pengajuan/') . $d->nomor_dokumen . '/' . $this->session->id  ?>" class="badge py-2 px-4 text-bg-primary">Ajukan ingin lihat</a></td>
+                <td><a href="<?= base_url('tambah_pengajuan/') . $d->nomor_dokumen . '/' . $this->session->id  ?>" class="badge py-2 px-4 text-bg-primary konfirmasi">Ajukan ingin lihat</a></td>
               <?php else : ?>
                 <td><a href="<?= base_url('assets/upload/') . $d->file_dokumen ?>" class="badge py-2 px-4 text-bg-primary">Lihat</a></td>
               <?php endif ?>
               <?php if ($role_id != 3) : ?>
                 <td class="d-flex gap-1 justify-content-center">
                   <a href="<?= base_url('edit_dokumen/') . $d->id ?> " class="btn btn-sm btn-primary"><i class='bx bxs-edit mx-auto'></i></a>
-                  <a href="<?= base_url('delete_dokumen/' . $d->id) ?>" onclick="return confirm('yakin mau hapus dokumen?')" class="btn btn-sm btn-danger"><i class='bx bxs-trash mx-auto'></i></a>
+                  <a href="<?= base_url('delete_dokumen/' . $d->id) ?>" class="btn btn-sm btn-danger hapus"><i class='bx bxs-trash mx-auto'></i></a>
                 </td>
               <?php endif ?>
 

@@ -42,8 +42,29 @@
   <script src="<?= base_url() ?>/assets/plugins/vectormap/jquery-jvectormap-world-mill-en.js"></script>
   <script src="<?= base_url() ?>/assets/plugins/chartjs/js/Chart.min.js"></script>
   <script src="<?= base_url() ?>/assets/js/index.js"></script>
+  <script src="<?= base_url('assets/js/sweetalert2.all.min.js') ?>"></script>
   <!--app JS-->
   <script>
+    const flashDataError = $('.flash-data-error').data('flashdata')
+    const flashDataSuccess = $('.flash-data-success').data('flashdata')
+    if (flashDataError) {
+      Swal.fire({
+        icon: 'error',
+        title: flashDataError,
+        timer: 5000,
+        timerProgressBar: true,
+
+      })
+    }
+    if (flashDataSuccess) {
+      Swal.fire({
+        icon: 'success',
+        title: flashDataSuccess,
+        timer: 5000,
+        timerProgressBar: true,
+
+      })
+    }
     $(document).ready(function() {
       $("#show_hide_password a").on('click', function(event) {
         event.preventDefault();

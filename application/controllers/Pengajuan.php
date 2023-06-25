@@ -83,11 +83,13 @@ class Pengajuan extends CI_Controller
       $this->db->set('tgl_selesai', date('Y-m-d'));
       $this->db->where('id', $id);
       $this->db->update('pengajuan');
+      $this->db->insert('riwayat_pengajuan', ['pengajuan_id' => $id]);
     } else {
       $this->db->set('status', 3);
       $this->db->set('tgl_selesai', date('Y-m-d'));
       $this->db->where('id', $id);
       $this->db->update('pengajuan');
+      $this->db->insert('riwayat_pengajuan', ['pengajuan_id' => $id]);
     }
     $this->session->set_flashdata('success', 'Berhasil menolak pengajuan');
     redirect('pengajuan');

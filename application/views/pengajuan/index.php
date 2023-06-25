@@ -2,11 +2,7 @@
 <?php
 $role_id = $this->session->role_id;
 ?>
-<?php if ($this->session->success) : ?>
-  <div class="alert alert-success" role="alert">
-    <?= $this->session->success ?>
-  </div>
-<?php endif ?>
+<div class="flash-data-success" data-flashdata="<?= $this->session->success ?>"></div>
 
 <div class="card radius-10">
   <div class="card-body">
@@ -172,13 +168,3 @@ $role_id = $this->session->role_id;
   </div>
   <?= $this->pagination->create_links() ?>
 </div>
-
-<script>
-  var myModal = document.getElementById('exampleModal');
-  myModal.addEventListener('show.bs.modal', function(event) {
-    var button = event.relatedTarget;
-    var id = button.getAttribute('data-id');
-    var form = myModal.querySelector('form');
-    form.action = '<?= base_url("pengajuan/tolak/") ?>' + id;
-  });
-</script>
