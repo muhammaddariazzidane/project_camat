@@ -6,7 +6,7 @@ class Pengajuan_model extends CI_Model
   public function getAll($limit, $start)
   {
     if ($this->session->role_id == 3) {
-      $this->db->select('pengajuan.id, dokumen.nama_dokumen, dokumen.keterangan, dokumen.file_dokumen, dokumen.nomor_dokumen, user.nama, pengajuan.tgl_pengajuan, pengajuan.status, pengajuan.tgl_selesai, pengajuan.keterangan, pengajuan.printed');
+      $this->db->select('pengajuan.id, pengajuan.alasan, dokumen.nama_dokumen, dokumen.keterangan, dokumen.file_dokumen, dokumen.nomor_dokumen, user.nama, pengajuan.tgl_pengajuan, pengajuan.status, pengajuan.tgl_selesai, pengajuan.keterangan, pengajuan.printed');
       $this->db->from('pengajuan');
       $this->db->join('dokumen', 'dokumen.id = pengajuan.dokumen_id');
       $this->db->join('user', 'user.id = pengajuan.user_id');
@@ -18,7 +18,7 @@ class Pengajuan_model extends CI_Model
       $query = $this->db->get();
       return $query->result();
     } else {
-      $this->db->select('pengajuan.id, dokumen.nama_dokumen, dokumen.keterangan, dokumen.file_dokumen, dokumen.nomor_dokumen, user.nama, pengajuan.tgl_pengajuan, pengajuan.status, pengajuan.tgl_selesai, pengajuan.keterangan, pengajuan.printed');
+      $this->db->select('pengajuan.id, pengajuan.alasan, dokumen.nama_dokumen, dokumen.keterangan, dokumen.file_dokumen, dokumen.nomor_dokumen, user.nama, pengajuan.tgl_pengajuan, pengajuan.status, pengajuan.tgl_selesai, pengajuan.keterangan, pengajuan.printed');
       $this->db->from('pengajuan');
       $this->db->join('dokumen', 'dokumen.id = pengajuan.dokumen_id');
       $this->db->join('user', 'user.id = pengajuan.user_id');

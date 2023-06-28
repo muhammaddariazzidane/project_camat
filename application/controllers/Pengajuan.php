@@ -8,52 +8,63 @@ class Pengajuan extends CI_Controller
     parent::__construct();
     is_logged_in();
   }
-  public function store($nomor_dokumen, $id)
+  public function store()
   {
-    $data['dokumen'] = $this->db->get_where('dokumen', ['nomor_dokumen' => $nomor_dokumen])->row();
-    $data['user'] = $this->db->get_where('user', ['id' => $id])->row();
-    $cek = $this->db->get_where('pengajuan', ['dokumen_id' => $data['dokumen']->id, 'user_id' => $id])->row();
-    if ($cek) {
-      if ($cek->status == 0) {
-        $this->session->set_flashdata('info', 'Pengajuan sudah ada, silahkan tunggu');
-        redirect('dashboard');
-      }
-      if ($cek->status == 1) {
-        $this->session->set_flashdata('info', 'Pengajuan sudah ada, silahkan tunggu disetujui camat');
-        redirect('dashboard');
-      }
-      if ($cek->status == 3) {
-        $data = [
-          'dokumen_id' => $data['dokumen']->id,
-          'user_id' => $data['user']->id,
-          'tgl_pengajuan' => date('Y-m-d'),
-          'status' => 0,
-        ];
-        $this->db->insert('pengajuan', $data);
-        $this->session->set_flashdata('success', 'Berhasil mengajukan, tunggu disetujui petugas');
-        redirect('dashboard');
-      }
-      if ($cek->status == 2) {
-        $data = [
-          'dokumen_id' => $data['dokumen']->id,
-          'user_id' => $data['user']->id,
-          'tgl_pengajuan' => date('Y-m-d'),
-          'status' => 0,
-        ];
-        $this->db->insert('pengajuan', $data);
-        $this->session->set_flashdata('success', 'Berhasil mengajukan, tunggu disetujui petugas');
-        redirect('dashboard');
-      }
-    } else {
-      $data = [
-        'dokumen_id' => $data['dokumen']->id,
-        'user_id' => $data['user']->id,
-        'tgl_pengajuan' => date('Y-m-d'),
-        'status' => 0,
-      ];
-      $this->db->insert('pengajuan', $data);
-      $this->session->set_flashdata('success', 'Berhasil mengajukan, tunggu disetujui petugas');
+    $alasan = $this->input->post('alasan');
+    $dokumen_id = $this->input->post('dokumen_id');
+    $user_id = $this->session->id;
+    $data['dokumen'] = $this->db->get_where('dokumen', ['id' => $dokumen_id])->row();
+    $this->form_validation->set_rules('alasan', 'Alasan', 'required|max_length[50]');
+    if ($this->form_validation->run() == false) {
+      $this->session->set_flashdata('info', 'Alasan tidak boleh lebih dari 50 karakter');
       redirect('dashboard');
+    } else {
+      $cek = $this->db->get_where('pengajuan', ['dokumen_id' => $data['dokumen']->id, 'user_id' => $user_id])->row();
+      if ($cek) {
+        if ($cek->status == 0) {
+          $this->session->set_flashdata('info', 'Pengajuan sudah ada, silahkan tunggu');
+          redirect('dashboard');
+        }
+        if ($cek->status == 1) {
+          $this->session->set_flashdata('info', 'Pengajuan sudah ada, silahkan tunggu disetujui camat');
+          redirect('dashboard');
+        }
+        if ($cek->status == 3) {
+          $data = [
+            'dokumen_id' => $data['dokumen']->id,
+            'user_id' => $user_id,
+            'tgl_pengajuan' => date('Y-m-d'),
+            'alasan' => $alasan,
+            'status' => 0,
+          ];
+          $this->db->insert('pengajuan', $data);
+          $this->session->set_flashdata('success', 'Berhasil mengajukan, tunggu disetujui petugas');
+          redirect('dashboard');
+        }
+        if ($cek->status == 2) {
+          $data = [
+            'dokumen_id' => $data['dokumen']->id,
+            'user_id' => $user_id,
+            'tgl_pengajuan' => date('Y-m-d'),
+            'alasan' => $alasan,
+            'status' => 0,
+          ];
+          $this->db->insert('pengajuan', $data);
+          $this->session->set_flashdata('success', 'Berhasil mengajukan, tunggu disetujui petugas');
+          redirect('dashboard');
+        }
+      } else {
+        $data = [
+          'dokumen_id' => $data['dokumen']->id,
+          'user_id' => $user_id,
+          'tgl_pengajuan' => date('Y-m-d'),
+          'alasan' => $alasan,
+          'status' => 0,
+        ];
+        $this->db->insert('pengajuan', $data);
+        $this->session->set_flashdata('success', 'Berhasil mengajukan, tunggu disetujui petugas');
+        redirect('dashboard');
+      }
     }
   }
   public function ubah_status($id)

@@ -34,7 +34,7 @@ class Dashboard extends CI_Controller
   {
     // hitung
     $data['hitung'] = $this->db->get_where('pengajuan', ['status' => 0])->num_rows();
-    $config['base_url'] = base_url('pengajuan/index/');
+    $config['base_url'] = base_url('dashboard/pengajuan/');
 
     $config['total_rows'] = $data['hitung'];
     $config['per_page'] = 10;
@@ -56,7 +56,7 @@ class Dashboard extends CI_Controller
   public function riwayat()
   {
     $data['jml_riwayat'] = $this->db->get('riwayat_pengajuan')->num_rows();
-    $config['base_url'] = base_url('riwayat_pengajuan/index/');
+    $config['base_url'] = base_url('dashboard/riwayat/');
 
     $config['total_rows'] = $data['jml_riwayat'];
     $config['per_page'] = 10;

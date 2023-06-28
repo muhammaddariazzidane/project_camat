@@ -2,7 +2,7 @@
 <?php
 $role_id = $this->session->role_id;
 ?>
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel3" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
@@ -110,7 +110,7 @@ $role_id = $this->session->role_id;
 <h3 class="mb-3">Data Dokumen</h3>
 <?php if ($role_id != 3) : ?>
   <!-- Button trigger modal -->
-  <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal3">
     Tambah dokumen
   </button>
 <?php endif ?>
@@ -146,7 +146,28 @@ $role_id = $this->session->role_id;
               <td><?= $d->keterangan ?></td>
               <td><?= dateindo($d->tgl_dibuat) ?></td>
               <?php if ($role_id == 3) : ?>
-                <td><a href="<?= base_url('tambah_pengajuan/') . $d->nomor_dokumen . '/' . $this->session->id  ?>" class="badge py-2 px-4 text-bg-primary konfirmasi">Ajukan ingin lihat</a></td>
+                <!-- <td><a href="<?= base_url('tambah_pengajuan/') . $d->nomor_dokumen . '/' . $this->session->id  ?>" class="badge py-2 px-4 text-bg-primary konfirmasi">Ajukan ingin lihat</a></td> -->
+                <td><button type="button" class="badge  btn py-2 px-4 text-bg-primary " onclick="myf(<?= $d->id ?>)" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Ajukan ingin lihat</button></td>
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Alasan ingin lihat dokumen</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      </div>
+                      <?= form_open('tambah_pengajuan')  ?>
+                      <div class="modal-body text-start">
+                        <label for="keterangan" class="form-label">Alasan </label>
+                        <input type="text" name="alasan" id="alasan" class="form-control" required />
+                      </div>
+                      <input type="hidden" name="dokumen_id" id="dokumen_id" value="<?= $d->id ?>" class="form-control" />
+                      <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary ajukan">Ajukan</button>
+                      </div>
+                      <?= form_close() ?>
+                    </div>
+                  </div>
+                </div>
               <?php else : ?>
                 <td><a href="<?= base_url('assets/upload/') . $d->file_dokumen ?>" class="badge py-2 px-4 text-bg-primary">Lihat</a></td>
               <?php endif ?>
@@ -167,3 +188,11 @@ $role_id = $this->session->role_id;
   </div>
   <?= $this->pagination->create_links(); ?>
 </div>
+<script>
+  const dokId = document.getElementById('dokumen_id');
+
+  function myf(id) {
+    dokId.value = id;
+    console.log(dokId.value);
+  }
+</script>

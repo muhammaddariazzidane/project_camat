@@ -73,6 +73,7 @@
     const flashDataSuccess = $('.flash-data-success').data('flashdata')
     const flashDataInfo = $('.flash-data-info').data('flashdata')
     const flashDataError = $('.flash-data-error').data('flashdata')
+
     if (flashDataError) {
       Swal.fire({
         icon: 'error',
@@ -124,38 +125,16 @@
         }
       })
     })
-    // konfirmasi
-    $('.konfirmasi').on('click', function(e) {
-      e.preventDefault()
-      const href = $(this).attr('href');
 
-      const swalWithBootstrapButtons = Swal.mixin({
-        customClass: {
-          confirmButton: 'btn btn-primary mx-2',
-          cancelButton: 'btn btn-danger'
-        },
-        buttonsStyling: false
-      })
 
-      swalWithBootstrapButtons.fire({
-        title: 'Ingin melihat dokumen?',
-        icon: 'question',
-        showCancelButton: true,
-        confirmButtonText: 'Ya',
-        cancelButtonText: 'Batal',
-      }).then((result) => {
-        if (result.value) {
-          document.location.href = href
-        }
-      })
-    })
-    var myModal = document.getElementById('exampleModal');
-    myModal.addEventListener('show.bs.modal', function(event) {
-      var button = event.relatedTarget;
-      var id = button.getAttribute('data-id');
-      var form = myModal.querySelector('form');
-      form.action = '<?= base_url("pengajuan/tolak/") ?>' + id;
-    });
+
+    // var myModal = document.getElementById('exampleModal');
+    // myModal.addEventListener('show.bs.modal', function(event) {
+    //   var button = event.relatedTarget;
+    //   var id = button.getAttribute('data-id');
+    //   var form = myModal.querySelector('form');
+    //   form.action = '<?= base_url("pengajuan/tolak/") ?>' + id;
+    // });
   </script>
 </body>
 

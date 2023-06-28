@@ -66,4 +66,5 @@ $route['delete_dokumen/(:num)'] = 'dokumen/delete/$1';
 $route['edit_dokumen/(:num)'] = 'dokumen/edit/$1';
 $route['tambah_dokumen'] = 'dokumen/store';
 $route['ubah_status/(:num)'] = 'pengajuan/ubah_status/$1';
-$route['tambah_pengajuan/(:num)/(:any)'] = 'pengajuan/store/$1/$2';
+// $route['tambah_pengajuan/(:num)/(:num)'] = 'pengajuan/store/$1/$2';
+$route['tambah_pengajuan'] = 'pengajuan/store';
