@@ -6,7 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!--favicon-->
-  <link rel="icon" href="<?= base_url() ?>/assets/images/favicon-32x32.png" type="image/png" />
+  <!-- <link rel="icon" href="<?= base_url() ?>/assets/images/favicon-32x32.png" type="image/png" /> -->
   <!--plugins-->
   <link href="<?= base_url() ?>/assets/plugins/vectormap/jquery-jvectormap-2.0.2.css" rel="stylesheet" />
   <link href="<?= base_url() ?>/assets/plugins/simplebar/css/simplebar.css" rel="stylesheet" />
@@ -50,7 +50,7 @@
     <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
     <!--End Back To Top Button-->
     <footer class="page-footer">
-      <p class="mb-0">Copyright © 2023. Muhammad dariaz zidane All right reserved.</p>
+      <p class="mb-0">Copyright © 2023. All right reserved.</p>
     </footer>
   </div>
   <!--end wrapper-->
@@ -70,6 +70,67 @@
   <script src="<?= base_url() ?>/assets/js/app.js"></script>
   <script src="<?= base_url('assets/js/sweetalert2.all.min.js') ?>"></script>
   <script>
+    // JavaScript
+    $('.lihat').on('click', function(e) {
+      e.preventDefault();
+      const href = $(this).attr('href');
+
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-primary mx-2',
+        },
+        buttonsStyling: false,
+      });
+
+      swalWithBootstrapButtons
+        .fire({
+          title: 'Perhatian',
+          text: 'Dokumen hanya bisa dilihat satu kali',
+          icon: 'warning',
+          confirmButtonText: 'Lihat',
+        })
+        .then((result) => {
+          if (result.value) {
+            // Buka halaman dengan file dokumen di tab baru
+            window.open(href, '_blank');
+
+            // Lakukan refresh pada halaman sebelumnya
+            setTimeout(function() {
+              location.reload();
+            }, 200);
+          }
+        });
+    });
+
+    // $('.lihat').on('click', function(e) {
+    //   e.preventDefault()
+    //   const href = $(this).attr('href');
+
+    //   const swalWithBootstrapButtons = Swal.mixin({
+    //     customClass: {
+    //       confirmButton: 'btn btn-primary mx-2',
+    //     },
+    //     buttonsStyling: false
+    //   })
+
+    //   swalWithBootstrapButtons.fire({
+    //     title: 'Perhatian',
+    //     text: 'Dokumen hanya bisa dilihat satu kali',
+    //     icon: 'warning',
+    //     confirmButtonText: 'Lihat',
+    //   }).then((result) => {
+    //     if (result.value) {
+    //       document.location.href = href
+    //       $(document).ready(function() {
+    //         setTimeout(function() {
+    //           location.reload();
+    //         }, 500);
+    //       })
+    //     }
+    //   })
+    //   // document.location.href = '<?= base_url('pengajuan') ?>'
+    // })
+
     const flashDataSuccess = $('.flash-data-success').data('flashdata')
     const flashDataInfo = $('.flash-data-info').data('flashdata')
     const flashDataError = $('.flash-data-error').data('flashdata')

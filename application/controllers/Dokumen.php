@@ -159,9 +159,10 @@ class Dokumen extends CI_Controller
   public function delete($id)
   {
     $data['dokumen'] = $this->db->get_where('dokumen', ['id' => $id])->row();
-    // var_dump($data['dokumen']);
-    // die;
+    $data['pengajuan'] =  $this->db->get_where('pengajuan', ['dokumen_id' => $id])->result();
+
     unlink(FCPATH . 'assets/upload/' . $data['dokumen']->file_dokumen);
+    $this->db->delete('pengajuan', ['dokumen_id' => $id]);
     $this->db->delete('dokumen', ['id' => $id]);
     $this->session->set_flashdata('success', 'Berhasil menghapus dokumen');
     redirect('dashboard');

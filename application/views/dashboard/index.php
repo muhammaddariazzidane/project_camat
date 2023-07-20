@@ -127,8 +127,10 @@ $role_id = $this->session->role_id;
     <div class="table-responsive">
       <table class="table align-middle mb-0">
         <thead class="table-light">
-          <tr>
-            <th>Nomor dokumen</th>
+          <tr class="text-center">
+            <?php if ($role_id == 1 || $role_id == 2) : ?>
+              <th>Nomor dokumen</th>
+            <?php endif ?>
             <th>Nama dokumen</th>
             <th>Keterangan</th>
             <th>Tanggal dibuat</th>
@@ -140,8 +142,10 @@ $role_id = $this->session->role_id;
         </thead>
         <tbody>
           <?php foreach ($dokumen as $d) : ?>
-            <tr>
-              <td><?= $d->nomor_dokumen ?></td>
+            <tr class="text-center">
+              <?php if ($role_id == 1 || $role_id == 2) : ?>
+                <td><?= $d->nomor_dokumen ?></td>
+              <?php endif ?>
               <td><?= $d->nama_dokumen ?></td>
               <td><?= $d->keterangan ?></td>
               <td><?= dateindo($d->tgl_dibuat) ?></td>

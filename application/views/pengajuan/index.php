@@ -11,7 +11,9 @@ $role_id = $this->session->role_id;
         <thead class="table-light">
           <tr class="text-center">
             <th>Nama pengaju</th>
-            <th>Nomor dokumen</th>
+            <?php if ($role_id != 3) : ?>
+              <th>Nomor dokumen</th>
+            <?php endif ?>
             <th>Nama dokumen</th>
             <th>Tanggal pengajuan</th>
             <?php if ($role_id != 3) : ?>
@@ -62,7 +64,7 @@ $role_id = $this->session->role_id;
                         <div class="modal-dialog modal-dialog-centered">
                           <div class="modal-content">
                             <div class="modal-header">
-                              <h1 class="modal-title fs-5" id="exampleModalTolakCamat">Form tolak</h1>
+                              <h1 class="modal-title fs-5" id="exampleModalTolakCamat">Form Penolakan</h1>
                               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body text-start">
@@ -91,7 +93,6 @@ $role_id = $this->session->role_id;
                 <td><?= $d->nama_dokumen ?></td>
                 <td><?= dateindo($d->tgl_pengajuan) ?></td>
                 <td><?= $d->alasan ?></td>
-
                 <td>
                   <span class="badge p-2 <?= $d->status == 0 ? 'text-bg-secondary' : ($d->status == 1 ? 'text-bg-primary' : ($d->status == 2 ? 'text-bg-success' : 'text-bg-danger')) ?>">
                     <?= $d->status == 0 ? 'Pending' : ($d->status == 1 ? 'Menunggu persetujuan camat' : ($d->status == 2 ? 'Selesai' : 'Ditolak')) ?>
@@ -112,7 +113,7 @@ $role_id = $this->session->role_id;
                         <div class="modal-dialog modal-dialog-centered">
                           <div class="modal-content">
                             <div class="modal-header">
-                              <h1 class="modal-title fs-5" id="exampleModalTolakPetugas">Form tolak</h1>
+                              <h1 class="modal-title fs-5" id="exampleModalTolakPetugas">Form Penolakan</h1>
                               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body text-start">
@@ -139,7 +140,7 @@ $role_id = $this->session->role_id;
             <?php if ($role_id == 3) : ?>
               <tr>
                 <td><?= $d->nama ?></td>
-                <td><?= $d->nomor_dokumen ?></td>
+                <!-- <td><?= $d->nomor_dokumen ?></td> -->
                 <td><?= $d->nama_dokumen ?></td>
                 <td class="text-center"><?= dateindo($d->tgl_pengajuan) ?></td>
                 <td class="text-center"><?= strlen($d->tgl_selesai > 0) ? dateindo($d->tgl_selesai) : '-'  ?></td>
@@ -151,7 +152,7 @@ $role_id = $this->session->role_id;
                 <!-- <td class="text-center"><?= $d->keterangan ? $d->keterangan : '-' ?></td> -->
                 <?php if ($d->status == 2 && $d->printed == 0) : ?>
                   <td>
-                    <a href="<?= base_url('pdf/cetak/') . $d->file_dokumen . '/' . $d->id  ?>" class="badge py-2 mx-5 text-bg-primary d-flex align-items-center justify-content-center"><span>Lihat dokumen</span> <i class="bx bx-show fs-6"></i></a>
+                    <a download="false" href="<?= base_url('pdf/cetak/') . $d->file_dokumen . '/' . $d->id  ?>" class="badge lihat py-2 mx-5 text-bg-primary d-flex align-items-center justify-content-center"><span>Lihat dokumen</span> <i class="bx bx-show fs-6"></i></a>
                   </td>
                 <?php else : ?>
                   <?php if ($d->status == 0 | $d->status == 1 && $d->printed == 0) : ?>

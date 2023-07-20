@@ -85,7 +85,7 @@ class Auth extends CI_Controller
     } else {
       $this->Auth_model->store_admin();
       $this->session->set_flashdata('success', 'Berhasil registrasi, silahkan login!');
-      redirect('auth');
+      redirect('login');
     }
   }
 
@@ -94,7 +94,13 @@ class Auth extends CI_Controller
     if (!$this->session->nama) {
       redirect('/');
     }
-    $this->session->unset_userdata('nama');
-    redirect('auth');
+    $data = [
+      'id',
+      'nama',
+      'role_id',
+      'email',
+    ];
+    $this->session->unset_userdata($data);
+    redirect('login');
   }
 }
