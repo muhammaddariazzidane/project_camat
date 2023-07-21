@@ -19,6 +19,15 @@
       </a>
     </li>
     <li class="menu-label">Data wishlist</li>
+    <?php if ($this->session->role_id != 3) : ?>
+      <li>
+        <a href="<?= base_url('dokumen') ?>">
+          <div class="parent-icon"><i class='bx bxs-widget'></i>
+          </div>
+          <div class="menu-title">Data dokumen</div>
+        </a>
+      </li>
+    <?php endif ?>
     <li>
       <a href="<?= base_url('pengajuan') ?>">
         <div class="parent-icon"><i class='bx bx-receipt'></i>

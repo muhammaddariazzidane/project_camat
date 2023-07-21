@@ -55,6 +55,7 @@ $route['translate_uri_dashes'] = FALSE;
 $route['login'] = 'auth';
 $route['register'] = 'auth/register';
 $route['logout'] = 'auth/logout';
+$route['dokumen'] = 'dokumen/index';
 $route['pengajuan'] = 'dashboard/pengajuan';
 $route['pengajuan/index/(:num)'] = 'dashboard/pengajuan/$1';
 $route['tolak_pengajuan/(:num)'] = 'pengajuan/tolak/$1';
