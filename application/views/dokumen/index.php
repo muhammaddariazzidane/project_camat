@@ -58,6 +58,7 @@ $role_id = $this->session->role_id;
 
 <div class="flash-data-success" data-flashdata="<?= $this->session->success ?>"></div>
 <div class="flash-data-info" data-flashdata="<?= $this->session->info ?>"></div>
+<div class="flash-data-error_doc" data-flashdata="<?= $this->session->error_doc ?>"></div>
 
 <?php if (validation_errors()) : ?>
   <div class="flash-data-error" data-flashdata="<?= validation_errors() ?>"></div>

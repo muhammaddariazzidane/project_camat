@@ -134,7 +134,17 @@
     const flashDataSuccess = $('.flash-data-success').data('flashdata')
     const flashDataInfo = $('.flash-data-info').data('flashdata')
     const flashDataError = $('.flash-data-error').data('flashdata')
+    const flashDataErrorDoc = $('.flash-data-error_doc').data('flashdata')
 
+    if (flashDataErrorDoc) {
+      Swal.fire({
+        icon: 'error',
+        title: 'File harus terisi',
+        timer: 5000,
+        timerProgressBar: true,
+
+      })
+    }
     if (flashDataError) {
       Swal.fire({
         icon: 'error',

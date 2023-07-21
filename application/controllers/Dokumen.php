@@ -90,12 +90,15 @@ class Dokumen extends CI_Controller
           $this->db->insert('dokumen', $data);
           // Redirect ke halaman sukses atau halaman lainnya
           $this->session->set_flashdata('success', 'Berhasil menambah dokumen');
-          redirect('dashboard');
+          redirect('dokumen');
         } else {
           // $errors = $this->upload->display_errors();
           $this->session->set_flashdata('error', 'Tipe file yang Anda coba unggah harus berupa PDF.');
-          redirect('dashboard');
+          redirect('dokumen');
         }
+      } else {
+        $this->session->set_flashdata('error_doc', 'file harus terisi');
+        redirect('dokumen');
       }
     }
   }
