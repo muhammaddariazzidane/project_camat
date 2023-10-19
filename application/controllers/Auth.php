@@ -36,6 +36,10 @@ class Auth extends CI_Controller
           'role_id' => $user->role_id,
           'email' => $user->email,
         ];
+        if ($user->role_id == 3) {
+          $this->session->set_userdata($data);
+          redirect('dokumen');
+        }
         $this->session->set_userdata($data);
         redirect('dashboard');
       } else {

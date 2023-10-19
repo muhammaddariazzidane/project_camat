@@ -17,17 +17,17 @@ class Pengajuan extends CI_Controller
     $this->form_validation->set_rules('alasan', 'Alasan', 'required|max_length[50]');
     if ($this->form_validation->run() == false) {
       $this->session->set_flashdata('info', 'Alasan tidak boleh lebih dari 50 karakter');
-      redirect('dashboard');
+      redirect('dokumen');
     } else {
       $cek = $this->db->get_where('pengajuan', ['dokumen_id' => $data['dokumen']->id, 'user_id' => $user_id])->row();
       if ($cek) {
         if ($cek->status == 0) {
           $this->session->set_flashdata('info', 'Pengajuan sudah ada, silahkan tunggu');
-          redirect('dashboard');
+          redirect('dokumen');
         }
         if ($cek->status == 1) {
           $this->session->set_flashdata('info', 'Pengajuan sudah ada, silahkan tunggu disetujui camat');
-          redirect('dashboard');
+          redirect('dokumen');
         }
         if ($cek->status == 3) {
           $data = [
@@ -39,7 +39,7 @@ class Pengajuan extends CI_Controller
           ];
           $this->db->insert('pengajuan', $data);
           $this->session->set_flashdata('success', 'Berhasil mengajukan, tunggu disetujui petugas');
-          redirect('dashboard');
+          redirect('dokumen');
         }
         if ($cek->status == 2) {
           $data = [
@@ -51,7 +51,7 @@ class Pengajuan extends CI_Controller
           ];
           $this->db->insert('pengajuan', $data);
           $this->session->set_flashdata('success', 'Berhasil mengajukan, tunggu disetujui petugas');
-          redirect('dashboard');
+          redirect('dokumen');
         }
       } else {
         $data = [
@@ -63,7 +63,7 @@ class Pengajuan extends CI_Controller
         ];
         $this->db->insert('pengajuan', $data);
         $this->session->set_flashdata('success', 'Berhasil mengajukan, tunggu disetujui petugas');
-        redirect('dashboard');
+        redirect('pengajuan');
       }
     }
   }

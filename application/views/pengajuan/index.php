@@ -33,6 +33,7 @@ $role_id = $this->session->role_id;
           </tr>
         </thead>
         <tbody class="text-center">
+
           <?php foreach ($pengajuan as $d) : ?>
             <!-- admin -->
             <?php if ($role_id == 1 && $d->status == 1) : ?>

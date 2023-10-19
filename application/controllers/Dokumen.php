@@ -32,11 +32,13 @@ class Dokumen extends CI_Controller
   }
   public function store()
   {
+    if ($this->session->role_id == 3) {
+      redirect('dokumen');
+    }
     // Validasi input form
     $this->form_validation->set_rules('nomor_dokumen', 'Nomor Dokumen', 'required|is_unique[dokumen.nomor_dokumen]', ['is_unique' => 'Nomor dokumen harus unik', 'required' => 'Nomor dokumen harus diisi']);
     $this->form_validation->set_rules('nama_dokumen', 'Nama Dokumen', 'required', ['required' => 'Nama dokumen harus diisi']);
     $this->form_validation->set_rules('keterangan', 'Keterangan', 'required', ['required' => 'Keterangan harus diisi']);
-    // Lanjutkan dengan validasi untuk field lainnya jika diperlukan
 
     if ($this->form_validation->run() == FALSE) {
       $data['jml_dokumen'] = $this->db->get('dokumen')->num_rows();
@@ -56,7 +58,7 @@ class Dokumen extends CI_Controller
       $data['jml_pengajuan'] = $this->Pengajuan_model->jumlahPengajuan();
       $data['jml_pengajuan_petugas'] = $this->Pengajuan_model->jumlahPengajuanPetugas();
       $data['jml_pengajuan_camat'] = $this->Pengajuan_model->jumlahPengajuanCamat();
-      $data['content'] = $this->load->view('dashboard/index', $data, true);
+      $data['content'] = $this->load->view('dokumen/index', $data, true);
       $this->load->view('layouts/main', $data);
     } else {
       $file_dokumen = $_FILES['file_dokumen']['name'];
@@ -104,6 +106,9 @@ class Dokumen extends CI_Controller
   }
   public function edit($id)
   {
+    if ($this->session->role_id == 3) {
+      redirect('dokumen');
+    }
     $data['dokumen'] = $this->db->get_where('dokumen', ['id' => $id])->row();
     $data['jml_pengajuan'] = $this->Pengajuan_model->jumlahPengajuan();
     $data['jml_pengajuan_petugas'] = $this->Pengajuan_model->jumlahPengajuanPetugas();
@@ -111,9 +116,11 @@ class Dokumen extends CI_Controller
     $data['content'] = $this->load->view('dokumen/edit', $data, true);
     $this->load->view('layouts/main', $data);
   }
-  // $data['tes'] = $this->db->get_where('dokumen', ['id' => $id])->row();
   public function update($id)
   {
+    if ($this->session->role_id == 3) {
+      redirect('dokumen');
+    }
     $this->form_validation->set_rules('nomor_dokumen', 'Nomor dokumen', 'required');
     $this->form_validation->set_rules('nama_dokumen', 'Nama dokumen', 'required');
 
@@ -176,13 +183,16 @@ class Dokumen extends CI_Controller
 
       // Tampilkan pesan berhasil atau redirect ke halaman lain
       $this->session->set_flashdata('success', 'Berhasil mengedit dokumen');
-      redirect('dashboard');
+      redirect('dokumen');
     }
   }
 
 
   public function delete($id)
   {
+    if ($this->session->role_id == 3) {
+      redirect('dokumen');
+    }
     $data['dokumen'] = $this->db->get_where('dokumen', ['id' => $id])->row();
     $data['pengajuan'] =  $this->db->get_where('pengajuan', ['dokumen_id' => $id])->result();
 
@@ -190,6 +200,6 @@ class Dokumen extends CI_Controller
     $this->db->delete('pengajuan', ['dokumen_id' => $id]);
     $this->db->delete('dokumen', ['id' => $id]);
     $this->session->set_flashdata('success', 'Berhasil menghapus dokumen');
-    redirect('dashboard');
+    redirect('dokumen');
   }
 }

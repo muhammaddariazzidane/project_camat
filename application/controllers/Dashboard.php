@@ -10,6 +10,10 @@ class Dashboard extends CI_Controller
   }
   public function index()
   {
+    if ($this->session->role_id == 3) {
+      redirect('dokumen');
+    }
+
     $data['jml_dokumen'] = $this->db->get('dokumen')->num_rows();
     $data['jml_users'] = $this->db->get('user')->num_rows();
     $data['jml_pengajuan_sukses'] = $this->db->get_where('pengajuan', ['status' => 2])->num_rows();
@@ -55,6 +59,10 @@ class Dashboard extends CI_Controller
   }
   public function riwayat()
   {
+    if ($this->session->role_id == 3) {
+      redirect('dokumen');
+    }
+
     $data['jml_riwayat'] = $this->db->get('riwayat_pengajuan')->num_rows();
     $config['base_url'] = base_url('dashboard/riwayat/');
 

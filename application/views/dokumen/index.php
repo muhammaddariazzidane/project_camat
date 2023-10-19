@@ -13,28 +13,28 @@ $role_id = $this->session->role_id;
         <?= form_open_multipart('tambah_dokumen') ?>
         <div class="mb-3">
           <label for="nomor_dokumen" class="form-label">Nomor dokumen</label>
-          <input type="number" class="form-control" id="nomor_dokumen" name="nomor_dokumen" placeholder="001">
+          <input type="number" class="form-control" id="nomor_dokumen" name="nomor_dokumen" placeholder="001" required>
           <div id="validationServerUsernameFeedback" class="invalid-feedback d-block">
             <?= form_error('nomor_dokumen') ?>
           </div>
         </div>
         <div class="mb-3">
           <label for="nama_dokumen" class="form-label">Nama dokumen</label>
-          <input type="text" class="form-control" id="nama_dokumen" name="nama_dokumen" placeholder="nama dokumen">
+          <input type="text" class="form-control" id="nama_dokumen" name="nama_dokumen" placeholder="nama dokumen" required>
           <div id="validationServerUsernameFeedback" class="invalid-feedback d-block">
             <?= form_error('nama_dokumen') ?>
           </div>
         </div>
         <div class="mb-3">
           <label for="keterangan" class="form-label">Keterangan</label>
-          <textarea name="keterangan" class="form-control" id="keterangan" rows="3"></textarea>
+          <textarea name="keterangan" class="form-control" id="keterangan" rows="3" required></textarea>
           <div id="validationServerUsernameFeedback" class="invalid-feedback d-block">
             <?= form_error('keterangan') ?>
           </div>
         </div>
         <div class="mb-3">
           <label for="file_dokumen" class="form-label">File</label>
-          <input type="file" name="file_dokumen" id="file_dokumen" class="form-control">
+          <input type="file" name="file_dokumen" id="file_dokumen" class="form-control" required>
         </div>
       </div>
       <div class="modal-footer">

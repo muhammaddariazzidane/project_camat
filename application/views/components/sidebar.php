@@ -11,13 +11,15 @@
   </div>
   <!--navigation-->
   <ul class="metismenu" id="menu">
-    <li>
-      <a href="<?= base_url('dashboard') ?>">
-        <div class="parent-icon"><i class='bx bxs-widget'></i>
-        </div>
-        <div class="menu-title">Dashboard</div>
-      </a>
-    </li>
+    <?php if ($this->session->role_id != 3) : ?>
+      <li>
+        <a href="<?= base_url('dashboard') ?>">
+          <div class="parent-icon"><i class='bx bxs-widget'></i>
+          </div>
+          <div class="menu-title">Dashboard</div>
+        </a>
+      </li>
+    <?php endif ?>
     <li class="menu-label">Data wishlist</li>
     <li>
       <a href="<?= base_url('dokumen') ?>">

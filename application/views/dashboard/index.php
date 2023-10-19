@@ -2,7 +2,7 @@
 <?php
 $role_id = $this->session->role_id;
 ?>
-<div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel3" aria-hidden="true">
+<!-- <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel3" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
@@ -45,7 +45,10 @@ $role_id = $this->session->role_id;
       </div>
     </div>
   </div>
-</div>
+</div> -->
+
+<div class="flash-data-success" data-flashdata="<?= $this->session->success ?>"></div>
+
 <?php if ($role_id == 1) : ?>
   <div class="row row-cols-2  row-cols-md-2 row-cols-xl-4">
     <div class="col">

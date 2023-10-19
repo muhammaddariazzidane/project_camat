@@ -88,48 +88,17 @@
           text: 'Dokumen hanya bisa dilihat satu kali',
           icon: 'warning',
           confirmButtonText: 'Lihat',
+          cancelButtonText: 'Batal',
         })
         .then((result) => {
           if (result.value) {
             // Buka halaman dengan file dokumen di tab baru
             window.open(href, '_blank');
 
-            // Lakukan refresh pada halaman sebelumnya
-            setTimeout(function() {
-              location.reload();
-            }, 200);
+            location.reload();
           }
         });
     });
-
-    // $('.lihat').on('click', function(e) {
-    //   e.preventDefault()
-    //   const href = $(this).attr('href');
-
-    //   const swalWithBootstrapButtons = Swal.mixin({
-    //     customClass: {
-    //       confirmButton: 'btn btn-primary mx-2',
-    //     },
-    //     buttonsStyling: false
-    //   })
-
-    //   swalWithBootstrapButtons.fire({
-    //     title: 'Perhatian',
-    //     text: 'Dokumen hanya bisa dilihat satu kali',
-    //     icon: 'warning',
-    //     confirmButtonText: 'Lihat',
-    //   }).then((result) => {
-    //     if (result.value) {
-    //       document.location.href = href
-    //       $(document).ready(function() {
-    //         setTimeout(function() {
-    //           location.reload();
-    //         }, 500);
-    //       })
-    //     }
-    //   })
-    //   // document.location.href = '<?= base_url('pengajuan') ?>'
-    // })
 
     const flashDataSuccess = $('.flash-data-success').data('flashdata')
     const flashDataInfo = $('.flash-data-info').data('flashdata')
