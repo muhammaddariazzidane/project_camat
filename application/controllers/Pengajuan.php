@@ -11,27 +11,27 @@ class Pengajuan extends CI_Controller
   public function store()
   {
     $alasan = $this->input->post('alasan');
-    $dokumen_id = $this->input->post('dokumen_id');
+    $surat_id = $this->input->post('surat_id');
     $user_id = $this->session->id;
-    $data['dokumen'] = $this->db->get_where('dokumen', ['id' => $dokumen_id])->row();
+    $data['surat'] = $this->db->get_where('surat', ['id' => $surat_id])->row();
     $this->form_validation->set_rules('alasan', 'Alasan', 'required|max_length[50]');
     if ($this->form_validation->run() == false) {
       $this->session->set_flashdata('info', 'Alasan tidak boleh lebih dari 50 karakter');
-      redirect('dokumen');
+      redirect('surat');
     } else {
-      $cek = $this->db->get_where('pengajuan', ['dokumen_id' => $data['dokumen']->id, 'user_id' => $user_id])->row();
+      $cek = $this->db->get_where('pengajuan', ['surat_id' => $data['surat']->id, 'user_id' => $user_id])->row();
       if ($cek) {
         if ($cek->status == 0) {
           $this->session->set_flashdata('info', 'Pengajuan sudah ada, silahkan tunggu');
-          redirect('dokumen');
+          redirect('surat');
         }
         if ($cek->status == 1) {
           $this->session->set_flashdata('info', 'Pengajuan sudah ada, silahkan tunggu disetujui camat');
-          redirect('dokumen');
+          redirect('surat');
         }
         if ($cek->status == 3) {
           $data = [
-            'dokumen_id' => $data['dokumen']->id,
+            'surat_id' => $data['surat']->id,
             'user_id' => $user_id,
             'tgl_pengajuan' => date('Y-m-d'),
             'alasan' => $alasan,
@@ -39,11 +39,11 @@ class Pengajuan extends CI_Controller
           ];
           $this->db->insert('pengajuan', $data);
           $this->session->set_flashdata('success', 'Berhasil mengajukan, tunggu disetujui petugas');
-          redirect('dokumen');
+          redirect('surat');
         }
         if ($cek->status == 2) {
           $data = [
-            'dokumen_id' => $data['dokumen']->id,
+            'surat_id' => $data['surat']->id,
             'user_id' => $user_id,
             'tgl_pengajuan' => date('Y-m-d'),
             'alasan' => $alasan,
@@ -51,11 +51,11 @@ class Pengajuan extends CI_Controller
           ];
           $this->db->insert('pengajuan', $data);
           $this->session->set_flashdata('success', 'Berhasil mengajukan, tunggu disetujui petugas');
-          redirect('dokumen');
+          redirect('surat');
         }
       } else {
         $data = [
-          'dokumen_id' => $data['dokumen']->id,
+          'surat_id' => $data['surat']->id,
           'user_id' => $user_id,
           'tgl_pengajuan' => date('Y-m-d'),
           'alasan' => $alasan,

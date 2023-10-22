@@ -22,10 +22,10 @@
     <?php endif ?>
     <li class="menu-label">Data wishlist</li>
     <li>
-      <a href="<?= base_url('dokumen') ?>">
-        <div class="parent-icon"><i class='bx bxs-widget'></i>
+      <a href="<?= base_url('surat') ?>">
+        <div class="parent-icon"><i class='bx bxs-envelope'></i>
         </div>
-        <div class="menu-title">Data dokumen</div>
+        <div class="menu-title">Data Surat Tanah</div>
       </a>
     </li>
     <li>
@@ -62,6 +62,4 @@
         <div class="menu-title">Logout</div>
       </a>
     </li>
-
-
 </aside>

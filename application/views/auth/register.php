@@ -34,10 +34,6 @@
                       </div>
                     </div>
                   </div>
-                  <div class="d-flex">
-                    Sudah puya akun?
-                    <a href="<?= base_url('login') ?>" class="text-decoration-underline ms-1">Login disini</a>
-                  </div>
                   <div class="col-12">
                     <div class="d-grid">
                       <button type="submit" class="btn btn-primary">Register</button>

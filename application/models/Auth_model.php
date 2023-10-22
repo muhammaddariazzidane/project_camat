@@ -9,7 +9,7 @@ class Auth_model extends CI_Model
       'nama' =>  $this->input->post('nama'),
       'email' =>  htmlspecialchars($this->input->post('email', TRUE)),
       'password' =>  password_hash($this->input->post('password'), PASSWORD_DEFAULT),
-      'role_id' =>  1,
+      'role_id' =>  3,
       'created_at' =>  time(),
     ];
     $this->db->insert('user', $data);

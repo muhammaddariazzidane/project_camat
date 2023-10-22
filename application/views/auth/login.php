@@ -25,10 +25,7 @@
                       <input type="password" class="form-control border-end-0" id="password" name="password" placeholder="Enter Password"> <a href="javascript:;" class="input-group-text bg-transparent"><i class='bx bx-hide'></i></a>
                     </div>
                   </div>
-                  <div class="d-flex">
-                    Belum puya akun?
-                    <a href="<?= base_url('register') ?>" class="text-decoration-underline ms-1">Register disini</a>
-                  </div>
+
                   <div class="col-12">
                     <div class="d-grid">
                       <button type="submit" class="btn btn-primary">Login</button>
@@ -41,7 +38,6 @@
           </div>
         </div>
       </div>
-      <!--end row-->
     </div>
   </div>
 </div>

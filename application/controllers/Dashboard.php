@@ -11,26 +11,27 @@ class Dashboard extends CI_Controller
   public function index()
   {
     if ($this->session->role_id == 3) {
-      redirect('dokumen');
+      redirect('surat');
     }
 
-    $data['jml_dokumen'] = $this->db->get('dokumen')->num_rows();
-    $data['jml_users'] = $this->db->get('user')->num_rows();
+    $data['jml_surat'] = $this->db->get('surat')->num_rows();
+    $data['jml_users'] = $this->db->get_where('user', ['role_id' => 3])->num_rows();
     $data['jml_pengajuan_sukses'] = $this->db->get_where('pengajuan', ['status' => 2])->num_rows();
     $data['jml_pengajuan_gagal'] = $this->db->get_where('pengajuan', ['status' => 3])->num_rows();
 
 
-    $config['total_rows'] = $data['jml_dokumen'];
+    $config['total_rows'] = $data['jml_surat'];
     $config['per_page'] = 10;
 
 
     $this->pagination->initialize($config);
     // mulai pagination
     $data['start'] = $this->uri->segment(3);
-    $data['dokumen'] = $this->Dokumen_model->getDokumen($config['per_page'], $data['start']);
+    $data['surat'] = $this->Surat_model->getSurat($config['per_page'], $data['start']);
     $data['jml_pengajuan'] = $this->Pengajuan_model->jumlahPengajuan();
     $data['jml_pengajuan_petugas'] = $this->Pengajuan_model->jumlahPengajuanPetugas();
     $data['jml_pengajuan_camat'] = $this->Pengajuan_model->jumlahPengajuanCamat();
+    $data['pengelola'] = $this->db->get_where('user', ['role_id' => 3])->result();
     $data['content'] = $this->load->view('dashboard/index', $data, true);
     $this->load->view('layouts/main', $data);
   }
@@ -60,7 +61,7 @@ class Dashboard extends CI_Controller
   public function riwayat()
   {
     if ($this->session->role_id == 3) {
-      redirect('dokumen');
+      redirect('surat');
     }
 
     $data['jml_riwayat'] = $this->db->get('riwayat_pengajuan')->num_rows();

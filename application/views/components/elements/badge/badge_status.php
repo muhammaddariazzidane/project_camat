@@ -1,0 +1,1 @@
+<span class="badge p-2 <?= $class ?>"><?= $text ?></span>

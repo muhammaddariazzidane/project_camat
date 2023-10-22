@@ -70,7 +70,6 @@
   <script src="<?= base_url() ?>/assets/js/app.js"></script>
   <script src="<?= base_url('assets/js/sweetalert2.all.min.js') ?>"></script>
   <script>
-    // JavaScript
     $('.lihat').on('click', function(e) {
       e.preventDefault();
       const href = $(this).attr('href');
@@ -85,8 +84,8 @@
       swalWithBootstrapButtons
         .fire({
           title: 'Perhatian',
-          text: 'Dokumen hanya bisa dilihat satu kali',
-          icon: 'warning',
+          text: 'Surat Tanah hanya bisa dilihat satu kali',
+          icon: 'info',
           confirmButtonText: 'Lihat',
           cancelButtonText: 'Batal',
         })
@@ -154,8 +153,8 @@
       })
 
       swalWithBootstrapButtons.fire({
-        title: 'Yakin mau hapus dokumen??',
-        icon: 'warning',
+        title: 'Yakin hapus Surat Tanah?',
+        icon: 'question',
         showCancelButton: true,
         confirmButtonText: 'Hapus',
         cancelButtonText: 'Batal',
@@ -165,16 +164,64 @@
         }
       })
     })
+    $('.hapus-pengelola').on('click', function(e) {
+      e.preventDefault()
+      const href = $(this).attr('href');
 
+      const swalWithBootstrapButtons = Swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-primary mx-2',
+          cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+      })
 
-
-    // var myModal = document.getElementById('exampleModal');
-    // myModal.addEventListener('show.bs.modal', function(event) {
-    //   var button = event.relatedTarget;
-    //   var id = button.getAttribute('data-id');
-    //   var form = myModal.querySelector('form');
-    //   form.action = '<?= base_url("pengajuan/tolak/") ?>' + id;
-    // });
+      swalWithBootstrapButtons.fire({
+        title: 'Yakin hapus pengelola?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonText: 'Hapus',
+        cancelButtonText: 'Batal',
+      }).then((result) => {
+        if (result.value) {
+          document.location.href = href
+        }
+      })
+    })
+    if (flashDataError) {
+      Swal.fire({
+        title: flashDataError,
+        timer: 5000,
+        icon: 'error',
+        timerProgressBar: true,
+        showCloseButton: true,
+        showConfirmButton: false
+      })
+    }
+    if (flashDataSuccess) {
+      Swal.fire({
+        title: flashDataSuccess,
+        icon: 'success',
+        timer: 5000,
+        timerProgressBar: true,
+        showCloseButton: true,
+        showConfirmButton: false
+      })
+    }
+    $(document).ready(function() {
+      $("#show_hide_password a").on('click', function(event) {
+        event.preventDefault();
+        if ($('#show_hide_password input').attr("type") == "text") {
+          $('#show_hide_password input').attr('type', 'password');
+          $('#show_hide_password i').addClass("bx-hide");
+          $('#show_hide_password i').removeClass("bx-show");
+        } else if ($('#show_hide_password input').attr("type") == "password") {
+          $('#show_hide_password input').attr('type', 'text');
+          $('#show_hide_password i').removeClass("bx-hide");
+          $('#show_hide_password i').addClass("bx-show");
+        }
+      });
+    });
   </script>
 </body>
 
