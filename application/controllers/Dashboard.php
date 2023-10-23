@@ -21,7 +21,7 @@ class Dashboard extends CI_Controller
 
 
     $config['total_rows'] = $data['jml_surat'];
-    $config['per_page'] = 10;
+    $config['per_page'] = 100;
 
 
     $this->pagination->initialize($config);
@@ -37,12 +37,11 @@ class Dashboard extends CI_Controller
   }
   public function pengajuan()
   {
-    // hitung
     $data['hitung'] = $this->db->get_where('pengajuan', ['status' => 0])->num_rows();
     $config['base_url'] = base_url('dashboard/pengajuan/');
 
     $config['total_rows'] = $data['hitung'];
-    $config['per_page'] = 10;
+    $config['per_page'] = 100;
 
     $this->pagination->initialize($config);
 
@@ -53,8 +52,7 @@ class Dashboard extends CI_Controller
     $data['jml_pengajuan'] = $this->Pengajuan_model->jumlahPengajuan();
 
     $data['jml_pengajuan_petugas'] = $this->Pengajuan_model->jumlahPengajuanPetugas();
-    // var_dump($data['jml_pengajuan_petugas']);
-    // die;
+
     $data['content'] = $this->load->view('pengajuan/index', $data, true);
     $this->load->view('layouts/main', $data);
   }
@@ -68,7 +66,7 @@ class Dashboard extends CI_Controller
     $config['base_url'] = base_url('dashboard/riwayat/');
 
     $config['total_rows'] = $data['jml_riwayat'];
-    $config['per_page'] = 10;
+    $config['per_page'] = 100;
 
     $this->pagination->initialize($config);
 

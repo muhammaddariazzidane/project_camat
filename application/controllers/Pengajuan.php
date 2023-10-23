@@ -14,6 +14,9 @@ class Pengajuan extends CI_Controller
     $surat_id = $this->input->post('surat_id');
     $user_id = $this->session->id;
     $data['surat'] = $this->db->get_where('surat', ['id' => $surat_id])->row();
+    if (!$data['surat']) {
+      show_404();
+    }
     $this->form_validation->set_rules('alasan', 'Alasan', 'required|max_length[50]');
     if ($this->form_validation->run() == false) {
       $this->session->set_flashdata('info', 'Alasan tidak boleh lebih dari 50 karakter');

@@ -125,6 +125,9 @@ class Surat extends CI_Controller
       redirect('surat');
     }
     $data['surat'] = $this->db->get_where('surat', ['id' => $id])->row();
+    if (!$data['surat']) {
+      show_404();
+    }
     $data['jml_pengajuan'] = $this->Pengajuan_model->jumlahPengajuan();
     $data['jml_pengajuan_petugas'] = $this->Pengajuan_model->jumlahPengajuanPetugas();
     $data['jml_pengajuan_camat'] = $this->Pengajuan_model->jumlahPengajuanCamat();
@@ -136,11 +139,14 @@ class Surat extends CI_Controller
     if ($this->session->role_id == 3) {
       redirect('surat');
     }
+    $data['surat'] = $this->db->get_where('surat', ['id' => $id])->row();
+    if (!$data['surat']) {
+      show_404();
+    }
     $this->form_validation->set_rules('nomor_surat', 'Nomor surat Tanah', 'required', ['required' => 'Nomor Surat Tanah harus diisi']);
     $this->form_validation->set_rules('nama_surat', 'Nama surat', 'required', ['required' => 'Nama Surat Tanah harus diisi']);
 
     if ($this->form_validation->run() == false) {
-      $data['surat'] = $this->db->get_where('surat', ['id' => $id])->row();
       $data['jml_pengajuan'] = $this->Pengajuan_model->jumlahPengajuan();
       $data['jml_pengajuan_petugas'] = $this->Pengajuan_model->jumlahPengajuanPetugas();
       $data['jml_pengajuan_camat'] = $this->Pengajuan_model->jumlahPengajuanCamat();
@@ -212,6 +218,9 @@ class Surat extends CI_Controller
       redirect('surat');
     }
     $data['surat'] = $this->db->get_where('surat', ['id' => $id])->row();
+    if (!$data['surat']) {
+      show_404();
+    }
     $data['pengajuan'] =  $this->db->get_where('pengajuan', ['surat_id' => $id])->result();
 
     unlink(FCPATH . 'assets/upload/' . $data['surat']->file_surat);

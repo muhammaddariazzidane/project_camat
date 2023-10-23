@@ -4,22 +4,23 @@ $role_id = $this->session->role_id;
 <h3 class="mb-3">Data Surat Tanah</h3>
 
 <?php $this->load->view('components/elements/modal/modal_tambah_surat') ?>
-<?php if ($role_id != 3) : ?>
-    <div class="row d-flex justify-content-between">
+<div class="row d-flex justify-content-between">
+    <?php if ($role_id != 3) : ?>
         <div class="col-lg-5">
-
             <button type="button" class="btn btn-primary mb-3 w-auto " data-bs-toggle="modal" data-bs-target="#exampleModal3">
                 Tambah Surat Tanah
             </button>
         </div>
-        <div class="col-lg-5">
-            <form method="GET" action="<?= base_url('surat') ?>" class="input-group mb-3">
-                <input type="text" autocomplete="off" class="form-control" name="keyword" value="<?= $keyword ?>" placeholder="Cari surat tanah..." aria-label="Recipient's username" aria-describedby="basic-addon2">
-                <button class="input-group-text" id="basic-addon2" type="submit">Cari</button>
-            </form>
-        </div>
+    <?php else : ?>
+        <div class="col-lg-5"></div>
+    <?php endif ?>
+    <div class="col-lg-5">
+        <form method="GET" action="<?= base_url('surat') ?>" class="input-group mb-3">
+            <input type="text" autocomplete="off" class="form-control" name="keyword" value="<?= $keyword ?>" placeholder="Cari surat tanah..." aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <button class="input-group-text" id="basic-addon2" type="submit">Cari</button>
+        </form>
     </div>
-<?php endif ?>
+</div>
 
 
 <div class="flash-data-success" data-flashdata="<?= $this->session->success ?>"></div>

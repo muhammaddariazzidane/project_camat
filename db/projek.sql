@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 21, 2023 at 06:43 AM
+-- Generation Time: Oct 23, 2023 at 12:49 AM
 -- Server version: 8.0.30
--- PHP Version: 8.0.28
+-- PHP Version: 8.0.29
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,49 +24,20 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `dokumen`
---
-
-CREATE TABLE `dokumen` (
-  `id` int NOT NULL,
-  `nomor_dokumen` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nama_dokumen` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `keterangan` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `file_dokumen` varchar(128) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tgl_dibuat` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `dokumen`
---
-
-INSERT INTO `dokumen` (`id`, `nomor_dokumen`, `nama_dokumen`, `keterangan`, `file_dokumen`, `tgl_dibuat`) VALUES
-(31, '0123', 'Akta Tanah A', 'Akta Tanah A', '82c7772ed97f1f36620a1300444413e5.pdf', '2023-06-25');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `pengajuan`
 --
 
 CREATE TABLE `pengajuan` (
   `id` int NOT NULL,
-  `dokumen_id` int NOT NULL,
+  `surat_id` int NOT NULL,
   `user_id` int NOT NULL,
   `tgl_pengajuan` date NOT NULL,
   `status` int NOT NULL,
   `tgl_selesai` date DEFAULT NULL,
-  `alasan` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `keterangan` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `alasan` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `keterangan` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `printed` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `pengajuan`
---
-
-INSERT INTO `pengajuan` (`id`, `dokumen_id`, `user_id`, `tgl_pengajuan`, `status`, `tgl_selesai`, `alasan`, `keterangan`, `printed`) VALUES
-(1, 31, 8, '2023-07-20', 2, '2023-07-20', 'Coba', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -83,7 +54,33 @@ CREATE TABLE `riwayat_pengajuan` (
 --
 
 INSERT INTO `riwayat_pengajuan` (`pengajuan_id`) VALUES
-(1);
+(1),
+(2),
+(3),
+(4);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `surat`
+--
+
+CREATE TABLE `surat` (
+  `id` int NOT NULL,
+  `nomor_surat` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nama_surat` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `keterangan` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `pemilik` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `file_surat` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tgl_dibuat` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `surat`
+--
+
+INSERT INTO `surat` (`id`, `nomor_surat`, `nama_surat`, `keterangan`, `pemilik`, `file_surat`, `tgl_dibuat`) VALUES
+(6, '001 / 2023', 'tes edit', 'tes', 'saya', '927d6a6bd0b27d8ea7b8fbbb4db939f3.pdf', '2023-10-23');
 
 -- --------------------------------------------------------
 
@@ -93,8 +90,8 @@ INSERT INTO `riwayat_pengajuan` (`pengajuan_id`) VALUES
 
 CREATE TABLE `user` (
   `id` int NOT NULL,
-  `nama` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(40) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nama` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `role_id` int NOT NULL,
   `created_at` int NOT NULL
@@ -107,8 +104,8 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `nama`, `email`, `password`, `role_id`, `created_at`) VALUES
 (6, 'admin', 'admin@gmail.com', '$2y$10$mXwEw6YhPe/dveniuA1nFel5IG2K.J7k.JyNEfBCeMcKDTLg9gLfC', 1, 1687241136),
 (7, 'petugas', 'petugas@gmail.com', '$2y$10$vPRXqSS.u2JSOGSOdUI6/On7YchlbbhnXB36m86fV4YbhvEap.qpi', 2, 1687241172),
-(8, 'user', 'user@gmail.com', '$2y$10$IYkQQgQEcd74m322RhQ9eOEOPjJe0DlrMqRvyWmy75JtMUcv7xUW2', 3, 1687241190),
-(9, 'user dua', 'userdua@gmail.com', '$2y$10$hJnHESf7LVUD9.C6032O1und9NeSHJEbTVzdTLreSxYX4f.bW82lC', 3, 1687248907);
+(8, 'user ', 'user@gmail.com', '$2y$10$IYkQQgQEcd74m322RhQ9eOEOPjJe0DlrMqRvyWmy75JtMUcv7xUW2', 3, 1687241190),
+(9, 'user dua', 'userdua@gmail.com', '$2y$10$g4mkWeuusIhqo5cC6DcsreA/c5dYnbQNfGjNtEp/WLabcVyRPhi8m', 3, 1687248907);
 
 -- --------------------------------------------------------
 
@@ -118,7 +115,7 @@ INSERT INTO `user` (`id`, `nama`, `email`, `password`, `role_id`, `created_at`) 
 
 CREATE TABLE `user_role` (
   `id` int NOT NULL,
-  `role` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL
+  `role` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -134,22 +131,23 @@ INSERT INTO `user_role` (`id`, `role`) VALUES
 --
 
 --
--- Indexes for table `dokumen`
---
-ALTER TABLE `dokumen`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `pengajuan`
 --
 ALTER TABLE `pengajuan`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `surat`
+--
+ALTER TABLE `surat`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `email` (`email`);
 
 --
 -- Indexes for table `user_role`
@@ -162,22 +160,22 @@ ALTER TABLE `user_role`
 --
 
 --
--- AUTO_INCREMENT for table `dokumen`
---
-ALTER TABLE `dokumen`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
-
---
 -- AUTO_INCREMENT for table `pengajuan`
 --
 ALTER TABLE `pengajuan`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `surat`
+--
+ALTER TABLE `surat`
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `user_role`

@@ -1,71 +1,45 @@
-###################
-What is CodeIgniter
-###################
+# Arsip Online Surat Tanah
 
-CodeIgniter is an Application Development Framework - a toolkit - for people
-who build web sites using PHP. Its goal is to enable you to develop projects
-much faster than you could if you were writing code from scratch, by providing
-a rich set of libraries for commonly needed tasks, as well as a simple
-interface and logical structure to access these libraries. CodeIgniter lets
-you creatively focus on your project by minimizing the amount of code needed
-for a given task.
+Arsip Online Surat Tanah adalah proyek aplikasi berbasis web yang dibangun dengan menggunakan CodeIgniter 3 dan Bootstrap 5 untuk menyimpan dan mengelola data surat tanah secara daring.
 
-*******************
-Release Information
-*******************
+## Deskripsi Proyek
 
-This repo contains in-development code for future releases. To download the
-latest stable release please visit the `CodeIgniter Downloads
-<https://codeigniter.com/download>`_ page.
+Proyek ini bertujuan untuk menciptakan sebuah platform yang memungkinkan kecamatan atau pihak berwenang untuk mengelola dan mengarsipkan data surat tanah secara efisien. Aplikasi ini memungkinkan pengguna untuk melakukan pencarian, penyimpanan, dan manajemen data surat tanah dengan cepat dan mudah.
 
-**************************
-Changelog and New Features
-**************************
+Fitur utama proyek ini meliputi:
+- Pencarian data surat tanah berdasarkan berbagai kriteria.
+- Penyimpanan data surat tanah.
+- Pengelolaan data surat tanah termasuk tambah, edit, hapus, dan pembaruan data.
+- Otorisasi pengguna dengan peran yang berbeda seperti admin dan petugas kecamatan.
 
-You can find a list of all changes for each release in the `user
-guide change log <https://github.com/bcit-ci/CodeIgniter/blob/develop/user_guide_src/source/changelog.rst>`_.
+## Teknologi yang Digunakan
 
-*******************
-Server Requirements
-*******************
+- CodeIgniter 3: Framework PHP untuk pengembangan aplikasi web yang efisien.
+- Bootstrap 5: Framework front-end untuk desain antarmuka pengguna yang responsif.
 
-PHP version 5.6 or newer is recommended.
+## Persyaratan
 
-It should work on 5.3.7 as well, but we strongly advise you NOT to run
-such old versions of PHP, because of potential security and performance
-issues, as well as missing features.
+- PHP >= 5.6
+- MySQL Database
+- Web Server (seperti Apache)
 
-************
-Installation
-************
+## Panduan Instalasi
 
-Please see the `installation section <https://codeigniter.com/userguide3/installation/index.html>`_
-of the CodeIgniter User Guide.
+1. Clone repositori ini ke direktori web server Anda.
+2. Impor database yang disediakan ke dalam MySQL.
+3. Konfigurasi file `application/config/database.php` dengan detail database Anda.
+4. Sesuaikan pengaturan lain yang diperlukan di file `application/config/config.php` dan file konfigurasi lainnya jika diperlukan.
+5. Akses aplikasi melalui browser Anda.
 
-*******
-License
-*******
+## Kontribusi
 
-Please see the `license
-agreement <https://github.com/bcit-ci/CodeIgniter/blob/develop/user_guide_src/source/license.rst>`_.
+Jika Anda ingin berkontribusi pada proyek ini, silakan buat permintaan tarik (pull request) dan kami akan memeriksanya.
 
-*********
-Resources
-*********
+## Lisensi
 
--  `User Guide <https://codeigniter.com/docs>`_
--  `Contributing Guide <https://github.com/bcit-ci/CodeIgniter/blob/develop/contributing.md>`_
--  `Language File Translations <https://github.com/bcit-ci/codeigniter3-translations>`_
--  `Community Forums <http://forum.codeigniter.com/>`_
--  `Community Wiki <https://github.com/bcit-ci/CodeIgniter/wiki>`_
--  `Community Slack Channel <https://codeigniterchat.slack.com>`_
+Proyek ini dilisensikan di bawah Lisensi MIT - lihat `license
+agreement <https://github.com/bcit-ci/CodeIgniter/blob/develop/user_guide_src/source/license.rst>`_. untuk detailnya.
 
-Report security issues to our `Security Panel <mailto:security@codeigniter.com>`_
-or via our `page on HackerOne <https://hackerone.com/codeigniter>`_, thank you.
+## Kontak
 
-***************
-Acknowledgement
-***************
-
-The CodeIgniter team would like to thank EllisLab, all the
-contributors to the CodeIgniter project and you, the CodeIgniter user.
+Jika Anda memiliki pertanyaan atau perlu bantuan, Anda dapat menghubungi kami di https://muhammad-dariaz-zidane.vercel.app (mailto:dariazzidane@email.com).

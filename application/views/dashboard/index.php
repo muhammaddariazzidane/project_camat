@@ -8,6 +8,9 @@ $role_id = $this->session->role_id;
 <?php if (validation_errors()) : ?>
   <div class="flash-data-error" data-flashdata="<?= validation_errors() ?>"></div>
 <?php endif ?>
+<?php if ($this->session->error) : ?>
+  <div class="flash-data-error" data-flashdata="<?= $this->session->error ?>"></div>
+<?php endif ?>
 
 <?php if ($role_id !== 3) : ?>
   <div class="row row-cols-2 row-cols-md-2 row-cols-xl-4">
@@ -76,10 +79,9 @@ $role_id = $this->session->role_id;
       <?php $this->load->view('components/elements/modal/modal_tambah_pengelola') ?>
     </div>
   </div>
-  <div class="row mt-3">
-    <div class="col-12">
+  <div class="row mt-3 px-3">
+    <div class="col-12 card">
       <div class="table-responsive">
-
         <table class="table table-hover ">
           <thead>
             <tr>
@@ -97,7 +99,9 @@ $role_id = $this->session->role_id;
                 <td><?= $p->nama ?></td>
                 <td><?= $p->email ?></td>
                 <td class="d-flex gap-1 ">
-                  <a href="<?= base_url('edit_pengelola/') . $p->id ?> " class="btn btn-sm btn-primary"><i class='bx bxs-edit mx-auto'></i></a>
+                  <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editUserModal<?= $p->id ?>">
+                    <i class='bx bxs-edit mx-auto'></i> </button>
+                  <?php $this->load->view('components/elements/modal/modal_edit_pengelola', ['p' => $p]) ?>
                   <a href="<?= base_url('delete_pengelola/' . $p->id) ?>" class="btn btn-sm btn-danger hapus-pengelola"><i class='bx bxs-trash mx-auto'></i></a>
                 </td>
               </tr>
