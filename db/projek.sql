@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Oct 23, 2023 at 12:49 AM
+-- Generation Time: Jul 04, 2024 at 04:29 AM
 -- Server version: 8.0.30
--- PHP Version: 8.0.29
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -49,16 +49,6 @@ CREATE TABLE `riwayat_pengajuan` (
   `pengajuan_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `riwayat_pengajuan`
---
-
-INSERT INTO `riwayat_pengajuan` (`pengajuan_id`) VALUES
-(1),
-(2),
-(3),
-(4);
-
 -- --------------------------------------------------------
 
 --
@@ -74,13 +64,6 @@ CREATE TABLE `surat` (
   `file_surat` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `tgl_dibuat` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `surat`
---
-
-INSERT INTO `surat` (`id`, `nomor_surat`, `nama_surat`, `keterangan`, `pemilik`, `file_surat`, `tgl_dibuat`) VALUES
-(6, '001 / 2023', 'tes edit', 'tes', 'saya', '927d6a6bd0b27d8ea7b8fbbb4db939f3.pdf', '2023-10-23');
 
 -- --------------------------------------------------------
 
@@ -104,8 +87,7 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `nama`, `email`, `password`, `role_id`, `created_at`) VALUES
 (6, 'admin', 'admin@gmail.com', '$2y$10$mXwEw6YhPe/dveniuA1nFel5IG2K.J7k.JyNEfBCeMcKDTLg9gLfC', 1, 1687241136),
 (7, 'petugas', 'petugas@gmail.com', '$2y$10$vPRXqSS.u2JSOGSOdUI6/On7YchlbbhnXB36m86fV4YbhvEap.qpi', 2, 1687241172),
-(8, 'user ', 'user@gmail.com', '$2y$10$IYkQQgQEcd74m322RhQ9eOEOPjJe0DlrMqRvyWmy75JtMUcv7xUW2', 3, 1687241190),
-(9, 'user dua', 'userdua@gmail.com', '$2y$10$g4mkWeuusIhqo5cC6DcsreA/c5dYnbQNfGjNtEp/WLabcVyRPhi8m', 3, 1687248907);
+(14, 'pengelola', 'pengelola@gmail.com', '$2y$10$TZ.K.jw9aM3VzSGj7u2nGOIGX.UdFrq1xBlyq0pZRwypNpfHBUgwK', 3, 1720067101);
 
 -- --------------------------------------------------------
 
@@ -163,19 +145,19 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT for table `pengajuan`
 --
 ALTER TABLE `pengajuan`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `surat`
 --
 ALTER TABLE `surat`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `user_role`

@@ -20,13 +20,13 @@ class Surat extends CI_Controller
     $data['keyword'] = $this->input->get('keyword');
     if ($data['keyword']) {
       $this->session->set_userdata('keyword', $data['keyword']);
+      $this->db->like('pemilik', $data['keyword']);
+      $this->db->or_like('nomor_surat', $data['keyword']);
+      $this->db->from('surat');
     } else {
       $data['keyword'] = $this->session->set_userdata('keyword');
     }
 
-    $this->db->like('pemilik', $data['keyword']);
-    $this->db->or_like('nomor_surat', $data['keyword']);
-    $this->db->from('surat');
 
     $config['total_rows'] = $this->db->count_all_results();
     $config['per_page'] = 100;

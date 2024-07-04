@@ -56,6 +56,7 @@ class Auth extends CI_Controller
     if (!$this->session->nama) {
       redirect('login');
     }
+
     $this->form_validation->set_rules('nama', 'Nama', 'required|max_length[20]', ['required' => 'Nama harus di isi', 'max_length' => 'Nama maksimal 20 karakter']);
     $this->form_validation->set_rules('email', 'Email', 'required|is_unique[user.email]|max_length[40]', ['required' => 'Email harus di isi', 'is_unique' => 'Email harus unik', 'max_length' => 'Email maksimal 40 karakter']);
     $this->form_validation->set_rules('password', 'Password', 'required|min_length[5]', ['required' => 'Password harus di isi', 'min_length' => 'Password minimal 5 karakter']);
@@ -85,6 +86,7 @@ class Auth extends CI_Controller
       redirect('dashboard');
     }
   }
+
   public function logout()
   {
     if (!$this->session->nama) {

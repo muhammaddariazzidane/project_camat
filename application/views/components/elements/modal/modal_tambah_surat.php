@@ -37,14 +37,13 @@
                 </div>
                 <div class="mb-3">
                     <label for="file_surat" class="form-label">File</label>
-                    <input type="file" name="file_surat" id="file_surat" class="form-control" required>
+                    <input type="file" name="file_surat" id="file_surat" class="form-control" accept="application/pdf,application/vnd.ms-excel" required>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-primary">Simpan</button>
                 <?= form_close() ?>
-
             </div>
         </div>
     </div>
